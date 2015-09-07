@@ -49,6 +49,8 @@
                                         :source-map    "resources/public/js/out.js.map"
                                         :preamble      ["react/react.min.js"]
                                         :optimizations :none
+                                        :main "clip.core"
+                                        :asset-path "js/out"
                                         :pretty-print  true}}}}
 
 
@@ -60,35 +62,29 @@
                     :session-key "california--bear"
                     :email-password "huxtables"
                     :is-dev true}
+
               :plugins [[jonase/eastwood "0.1.4"]
-                        [lein-figwheel "0.2.5"]]
+                        [lein-figwheel "0.3.9"]]
+
               :eastwood {:exclude-linters [:deprecations]}
 
-              :dependencies [[figwheel "0.2.5"]
-                             [figwheel-sidecar "0.2.5"]
-                             [com.cemerick/piggieback "0.1.5"]
-                             [weasel "0.6.0"]]
-
-              :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
-
               :figwheel {:http-server-root "public"
-                         :server-port 3449
                          :css-dirs ["resources/public/css"]
-                         :ring-handler derp.server/http-handler}
+                         :nrepl-port 7002
+                         :ring-handler clip.core/app}
 
-              :cljsbuild {:test-commands { "test" ["phantomjs" "env/test/js/unit-test.js" "env/test/unit-test.html"] }
-                          :builds {:app {:source-paths ["env/dev/cljs"]}
+              :cljsbuild {:test-commands {"test"
+                                          ["phantomjs"
+                                           "env/test/js/unit-test.js"
+                                           "env/test/unit-test.html"]}
+                          :builds {:app {:figwheel true}
                                    :test {:source-paths ["src/cljs" "test/cljs"]
                                           :compiler {:output-to     "resources/public/js/app_test.js"
                                                      :output-dir    "resources/public/js/test"
                                                      :source-map    "resources/public/js/test.js.map"
                                                      :preamble      ["react/react.min.js"]
                                                      :optimizations :whitespace
-                                                     :pretty-print  false}}}}
-
-
-
-              }
+                                                     :pretty-print  false}}}}}
 
              :test
              {:env {:environment "test"
@@ -105,19 +101,13 @@
              :production
              {:env {:environment "production"}}
 
-             :uberjar {:source-paths ["env/prod/clj"]
-                       :hooks [leiningen.cljsbuild]
+             :uberjar {:hooks [leiningen.cljsbuild]
                        :env {:production true}
                        :omit-source true
                        :aot :all
-                       :main derp.server
                        :cljsbuild {:builds {:app
-                                            {:source-paths ["env/prod/cljs"]
+                                            {:jar true
                                              :compiler
                                              {:optimizations :advanced
                                               :pretty-print false}}}}}}
-
-
-
-
   )
