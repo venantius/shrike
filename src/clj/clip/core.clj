@@ -3,10 +3,11 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer :all]
             [ring.middleware.reload :refer [wrap-reload]]
+            [ring.util.response :as resp]
             [titan.server :as server]))
 
 (defroutes app-routes
-  (GET "/" [] {:status 200 :body "Butts." :headers {"content-type" "text/plain"}})
+  (GET "/" [] (resp/file-response "index.html" {:root "public"}))
   (route/resources "/" {:root "public"})
   (route/not-found "Whoops! Y'all found some shit that don't exist!"))
 
