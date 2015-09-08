@@ -12,6 +12,8 @@
                  ;; ClojureScript
                  [org.clojure/clojurescript "1.7.48"]
                  [org.omcljs/om "0.9.0"]
+                 [prismatic/om-tools "0.3.12"]
+                 [clj-jade "0.1.7"]
 
 
                  ;; This upper section is for Clip
@@ -45,7 +47,7 @@
 
   :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
                              :compiler {:output-to     "resources/public/js/app.js"
-                                        :output-dir    "resources/public/js/out"
+                                        :output-dir    "target/js"
                                         :source-map    "resources/public/js/out.js.map"
                                         :preamble      ["react/react.min.js"]
                                         :optimizations :none
@@ -66,6 +68,8 @@
               :plugins [[jonase/eastwood "0.1.4"]
                         [lein-figwheel "0.3.9"]]
 
+              :jvm-opts ["-Dlog4j.configuration=log4j-dev.properties"]
+
               :eastwood {:exclude-linters [:deprecations]}
 
               :figwheel {:http-server-root "public"
@@ -80,7 +84,7 @@
                           :builds {:app {:figwheel true}
                                    :test {:source-paths ["src/cljs" "test/cljs"]
                                           :compiler {:output-to     "resources/public/js/app_test.js"
-                                                     :output-dir    "resources/public/js/test"
+                                                     :output-dir    "target/js/out-test"
                                                      :source-map    "resources/public/js/test.js.map"
                                                      :preamble      ["react/react.min.js"]
                                                      :optimizations :whitespace

@@ -1,6 +1,7 @@
 (ns clip.core
   (:gen-class)
-  (:require [clojure.tools.logging :as log]
+  (:require [clj-jade.core :as jade]
+            [clojure.tools.logging :as log]
             [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer :all]
@@ -10,7 +11,7 @@
 
 (defn spa
   [req]
-  (log/warn "FUCK")
+  (log/warn "Index page requested")
   (resp/header
    (resp/resource-response "index.html" {:root "public"})
    "Content-Type" "text/html; charset=utf-8"))
