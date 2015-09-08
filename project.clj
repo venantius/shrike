@@ -1,4 +1,4 @@
-(defproject clip "0.1.0-SNAPSHOT"
+(defproject shrike "0.1.0-SNAPSHOT"
   :description "Hosted Code Quality Analysis for Clojure"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -16,7 +16,7 @@
                  [clj-jade "0.1.7"]
 
 
-                 ;; This upper section is for Clip
+                 ;; This upper section is for shrike
 
                  ;; Everything below here is needed for Titan
                  [korma "0.4.2"]
@@ -32,50 +32,43 @@
                  [clj-time "0.11.0"]
 
                  ;; Additional JDBC drivers may be required.
-                 [org.postgresql/postgresql "9.4-1202-jdbc4"]
-
-
-                 ]
+                 [org.postgresql/postgresql "9.4-1202-jdbc4"]]
 
   :plugins [[lein-cljsbuild "1.0.5"]
             [lein-environ "1.0.0"]]
 
-  :main clip.core
+  :main shrike.core
   :source-paths ["src/clj"]
   :test-paths ["test/clj"]
   :min-lein-version "2.5.0"
 
   :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
                              :compiler {:output-to     "resources/public/js/app.js"
-                                        :output-dir    "target/js"
+                                        :output-dir    "resources/public/js/out"
                                         :source-map    "resources/public/js/out.js.map"
                                         :preamble      ["react/react.min.js"]
                                         :optimizations :none
-                                        :main "clip.core"
+                                        :main "shrike.core"
                                         :asset-path "js/out"
                                         :pretty-print  true}}}}
 
 
   :profiles {:dev
              {:env {:environment "dev"
-                    :database-url "postgres://localhost:5432/clip"
+                    :database-url "postgres://localhost:5432/shrike"
                     :reload-db-on-run true
                     :port "8080"
-                    :session-key "california--bear"
-                    :email-password "huxtables"
-                    :is-dev true}
+                    :session-key "california--bear"}
 
               :plugins [[jonase/eastwood "0.1.4"]
                         [lein-figwheel "0.3.9"]]
-
-              :jvm-opts ["-Dlog4j.configuration=log4j-dev.properties"]
 
               :eastwood {:exclude-linters [:deprecations]}
 
               :figwheel {:http-server-root "public"
                          :css-dirs ["resources/public/css"]
                          :nrepl-port 7002
-                         :ring-handler clip.core/app}
+                         :ring-handler shrike.core/app}
 
               :cljsbuild {:test-commands {"test"
                                           ["phantomjs"
@@ -84,7 +77,7 @@
                           :builds {:app {:figwheel true}
                                    :test {:source-paths ["src/cljs" "test/cljs"]
                                           :compiler {:output-to     "resources/public/js/app_test.js"
-                                                     :output-dir    "target/js/out-test"
+                                                     :output-dir    "resources/public/js/test"
                                                      :source-map    "resources/public/js/test.js.map"
                                                      :preamble      ["react/react.min.js"]
                                                      :optimizations :whitespace
@@ -92,10 +85,9 @@
 
              :test
              {:env {:environment "test"
-                    :database-url "postgres://localhost:5432/clip_test"
+                    :database-url "postgres://localhost:5432/shrike_test"
                     :port "8080"
-                    :session-key "antarctica--bear"
-                    :email-password "huxtables"}
+                    :session-key "antarctica--bear"}
               :plugins [[jonase/eastwood "0.1.4"]]
               :jvm-opts ["-Dlog4j.configuration=log4j-test.properties"]}
 

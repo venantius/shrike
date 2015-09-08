@@ -1,11 +1,11 @@
 all: init
 
 init:
-	createdb clip
-	createdb clip_test
+	createdb shrike
+	createdb shrike_test
 
 rebuild:
-	dropdb clip
-	dropdb clip_test
+	dropdb shrike
+	dropdb shrike_test
 	make init
 
