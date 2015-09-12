@@ -15,7 +15,6 @@ goog.addDependency("../plumbing/core.js", ['plumbing.core'], ['cljs.core', 'plum
 goog.addDependency("../om/core.js", ['om.core'], ['goog.dom', 'cljs.core', 'om.dom', 'goog.dom.dataset', 'goog.object', 'cljsjs.react', 'goog.ui.IdGenerator']);
 goog.addDependency("../om_tools/core.js", ['om_tools.core'], ['plumbing.core', 'schema.core', 'cljs.core', 'om.core', 'plumbing.fnk.schema']);
 goog.addDependency("../shrike/components/navbar.js", ['shrike.components.navbar'], ['om_tools.dom', 'om_tools.core', 'cljs.core', 'om.core']);
-goog.addDependency("../shrike/core.js", ['shrike.core'], ['om_tools.dom', 'om_tools.core', 'cljs.core', 'shrike.components.navbar', 'om.core']);
 goog.addDependency("../cljs/core/async/impl/protocols.js", ['cljs.core.async.impl.protocols'], ['cljs.core']);
 goog.addDependency("../cljs/core/async/impl/ioc_helpers.js", ['cljs.core.async.impl.ioc_helpers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async/impl/buffers.js", ['cljs.core.async.impl.buffers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
@@ -29,6 +28,7 @@ goog.addDependency("../cljs/core/async.js", ['cljs.core.async'], ['cljs.core.asy
 goog.addDependency("../clojure/set.js", ['clojure.set'], ['cljs.core']);
 goog.addDependency("../figwheel/client/file_reloading.js", ['figwheel.client.file_reloading'], ['goog.string', 'goog.net.jsloader', 'goog.Uri', 'cljs.core', 'goog.object', 'cljs.core.async', 'clojure.set', 'figwheel.client.utils', 'clojure.string']);
 goog.addDependency("../figwheel/client/heads_up.js", ['figwheel.client.heads_up'], ['goog.string', 'cljs.core', 'cljs.core.async', 'figwheel.client.socket', 'clojure.string']);
+goog.addDependency("../shrike/core.js", ['shrike.core'], ['om_tools.dom', 'om_tools.core', 'cljs.core', 'shrike.components.navbar', 'om.core']);
 goog.addDependency("../cljs/repl.js", ['cljs.repl'], ['cljs.core']);
 goog.addDependency("../figwheel/client.js", ['figwheel.client'], ['goog.Uri', 'cljs.core', 'cljs.core.async', 'figwheel.client.file_reloading', 'figwheel.client.utils', 'cljs.repl', 'figwheel.client.heads_up', 'figwheel.client.socket', 'clojure.string']);
 goog.addDependency("../figwheel/connect.js", ['figwheel.connect'], ['shrike.core', 'cljs.core', 'figwheel.client', 'figwheel.client.utils']);

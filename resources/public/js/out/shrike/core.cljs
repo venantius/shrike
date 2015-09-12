@@ -9,11 +9,11 @@
 (defonce app-state (atom {}))
 
 (defcomponent app-body
-  [data owner]
-  (render [_]
-          ;; Don't let this be a body tag! Otherwise BAD THINGS happen.
-          (dom/div
-            {:class "with-top-navbar"}
+    [data owner]
+    (render [_]
+            ;; Don't let this be a body tag! Otherwise BAD THINGS happen.
+            (dom/div
+              {:class "with-top-navbar"}
             (om/build navbar/navbar data))))
 
 (om/root

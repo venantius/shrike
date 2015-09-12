@@ -38,7 +38,7 @@
             [lein-environ "1.0.0"]]
 
   :main shrike.core
-  :source-paths ["src/clj"]
+  :source-paths ["src/clj", "src/cljs"]
   :test-paths ["test/clj"]
   :min-lein-version "2.5.0"
 
@@ -60,7 +60,15 @@
                     :port "8080"
                     :session-key "california--bear"}
 
+              ;; Need this for Vim support
+              :dependencies [[com.cemerick/piggieback "0.2.1"]
+                             [org.clojure/tools.nrepl "0.2.10"]
+                             [weasel "0.7.0" :exclusions  [org.clojure/clojurescript]]
+                             ]
+              :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+
               :plugins [[jonase/eastwood "0.1.4"]
+                        [com.cemerick/austin "0.1.6"]
                         [lein-figwheel "0.3.9"]]
 
               :eastwood {:exclude-linters [:deprecations]}
