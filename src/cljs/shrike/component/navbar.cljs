@@ -1,4 +1,4 @@
-(ns shrike.components.navbar
+(ns shrike.component.navbar
   (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]))

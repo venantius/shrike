@@ -1,5 +1,6 @@
 (ns shrike.core
-  (:require [shrike.components.navbar :as navbar]
+  (:require [shrike.component.navbar :as navbar]
+            [shrike.component.statcard :as statcard]
             [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]))
@@ -20,3 +21,16 @@
   app-body
   app-state
   {:target (. js/document (getElementById "my-app"))})
+
+(defcomponent statcards
+  [data owner]
+  (render
+    [_]
+    (dom/div
+      {:class "row statcards"}
+      (om/build-all statcard/statcard [1 2 3 4]))))
+
+(om/root
+  statcards
+  app-state
+  {:target (. js/document (getElementById "my-app2"))})

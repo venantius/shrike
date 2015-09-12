@@ -1,7 +1,6 @@
 (ns shrike.core
   (:gen-class)
-  (:require [clj-jade.core :as jade]
-            [clojure.tools.logging :as log]
+  (:require [clojure.tools.logging :as log]
             [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer :all]

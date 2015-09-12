@@ -5,28 +5,25 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
 
+                 ;; Logging
                  [org.clojure/tools.logging "0.3.1"]
-
                  [org.slf4j/slf4j-log4j12 "1.7.12"]
 
                  ;; ClojureScript
                  [org.clojure/clojurescript "1.7.48"]
                  [org.omcljs/om "0.9.0"]
                  [prismatic/om-tools "0.3.12"]
-                 [clj-jade "0.1.7"]
 
-
-                 ;; This upper section is for shrike
+                 ;; This section is for shrike
+                 [tentacles "0.3.0"]
 
                  ;; Everything below here is needed for Titan
                  [korma "0.4.2"]
                  [ragtime "0.5.2"]
-
                  [ring "1.4.0"]
                  [aleph "0.4.0"] ;; let's try Aleph
                  [ring/ring-defaults "0.1.5"]
                  [compojure "1.4.0"]
-
                  [prismatic/schema "1.0.1"]
                  [environ "1.0.0"]
                  [clj-time "0.11.0"]
@@ -60,15 +57,10 @@
                     :port "8080"
                     :session-key "california--bear"}
 
-              ;; Need this for Vim support
-              :dependencies [[com.cemerick/piggieback "0.2.1"]
-                             [org.clojure/tools.nrepl "0.2.10"]
-                             [weasel "0.7.0" :exclusions  [org.clojure/clojurescript]]
-                             ]
-              :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+              :repl-options {:port 7002
+                             :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
               :plugins [[jonase/eastwood "0.1.4"]
-                        [com.cemerick/austin "0.1.6"]
                         [lein-figwheel "0.3.9"]]
 
               :eastwood {:exclude-linters [:deprecations]}
@@ -96,8 +88,7 @@
                     :database-url "postgres://localhost:5432/shrike_test"
                     :port "8080"
                     :session-key "antarctica--bear"}
-              :plugins [[jonase/eastwood "0.1.4"]]
-              :jvm-opts ["-Dlog4j.configuration=log4j-test.properties"]}
+              :plugins [[jonase/eastwood "0.1.4"]]}
 
              :staging
              {:env {:environment "staging"}}
