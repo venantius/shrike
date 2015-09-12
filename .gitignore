@@ -1,6 +1,7 @@
 /target
 /classes
 /checkouts
+resources/public/js/out/**
 node_modules
 pom.xml
 pom.xml.asc
@@ -10,4 +11,3 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
-/resources/public/js
