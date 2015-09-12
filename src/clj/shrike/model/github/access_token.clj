@@ -1,4 +1,5 @@
 (ns shrike.model.github.access-token
+  (:refer-clojure :exclude [update])
   (:require [shrike.model :as db]
             [titan.model :refer [defmodel]]
             [korma.core :refer :all]
@@ -16,7 +17,6 @@
   [{:keys [gh_user_id] :as at}]
   (if-let [maybe-at (fetch-one-github-access-token {:gh_user_id gh_user_id})]
     (update-github-access-token!
-      (:id maybe-at)
-      at)
+     (:id maybe-at)
+     at)
     (create-github-access-token! at)))
-

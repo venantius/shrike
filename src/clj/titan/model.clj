@@ -10,8 +10,11 @@
 
 (defn- fetch
   [entity]
-  (fn [params]
-    (korma/select entity (korma/where params))))
+  (fn
+    ([]
+     (korma/select entity (korma/where {})))
+    ([params]
+     (korma/select entity (korma/where params)))))
 
 (defn- fetch-one
   [entity]

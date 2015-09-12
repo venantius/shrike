@@ -1,5 +1,6 @@
 (ns shrike.core
-  (:require [shrike.component.navbar :as navbar]
+  (:require [shrike.component.github]
+            [shrike.component.navbar :as navbar]
             [shrike.component.statcard :as statcard]
             [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]

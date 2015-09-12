@@ -6,6 +6,7 @@
             [ring.middleware.defaults :refer :all]
             [ring.middleware.reload :refer [wrap-reload]]
             [ring.util.response :as resp]
+            [shrike.controller.oauth.github :as gh-oauth]
             [titan.server :as server]))
 
 (defn spa
@@ -17,6 +18,10 @@
 
 (defroutes app-routes
   (GET "/" [] spa)
+
+  (GET    "/oauth/github/login" req (gh-oauth/redirect req))
+  (GET    "/oauth/github"                [] gh-oauth/callback)
+
   (route/resources "/")
   (route/not-found "Whoops! Y'all found some shit that don't exist!"))
 

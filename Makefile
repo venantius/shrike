@@ -11,7 +11,8 @@ rollback:
 	lein run -m titan.db.migrations/rollback
 
 rebuild:
-	dropdb shrike
-	dropdb shrike_test
+	dropdb shrike || :
+	dropdb shrike_test || :
 	make init
+	make migrate
 

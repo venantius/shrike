@@ -1,24 +1,24 @@
 (ns shrike.oauth.github
   "For details on the Github OAuth flow, refer to documentation here:
 
-   https://developer.github.com/v3/oauth/#web-application-flow.
-
-   This namespace includes the callback function and other utility functions
-   for creating github auth-tokens and ensuring we store the user in our db."
+   https://developer.github.com/v3/oauth/#web-application-flow."
   (:require [cemerick.url :as url]
             [cheshire.core :as json]
             [environ.core :as env]
             [clj-http.client :as http]
             [ring.util.response :as response]))
 
+(def ^:private client-id
+  (env/env :gh-client-id))
 
-(def client-id (env/env :gh-basic-client-id))
-(def client-secret (env/env :gh-basic-secret-id))
+(def ^:private client-secret
+  (env/env :gh-client-secret))
 
-(def github-login-url (url/url "https://github.com/login/oauth/authorize"))
+(def ^:private github-login-url
+  (url/url "https://github.com/login/oauth/authorize"))
 
 (defn github-redirect-url
-  "Returns a redirect response to the GitHub access page."
+  "Returns a redirect response to Github for the user to give us authorization."
   [state]
   (let [url (assoc
              github-login-url
@@ -27,11 +27,9 @@
                      :scope "user,repo,read:org"
                      :state state})]
     (assoc-in
-      (response/redirect (str url))
-      [:headers "Access-Control-Allow-Origin"]
-      "*")))
-
-;; Parses Github OAuth response and updates tables
+     (response/redirect (str url))
+     [:headers "Access-Control-Allow-Origin"]
+     "*")))
 
 (defn access-token-exchange
   "POST to GitHub with the code from the callback."

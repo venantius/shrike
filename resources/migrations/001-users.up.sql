@@ -9,11 +9,21 @@ CREATE TABLE shrike.user (
 
 CREATE SCHEMA github;
 
+CREATE TABLE github.oauth_state (
+  id    SERIAL    PRIMARY KEY,
+  state TEXT      NOT NULL
+);
+
 CREATE TABLE github.access_token (
   id          SERIAL      PRIMARY KEY,
-  gh_user_id  INTEGER     REFERENCES github.user(id) ON DELETE CASCADE,
   token       TEXT        NOT NULL,
   scope       TEXT
+);
+
+CREATE TABLE github.user (
+  id              SERIAL    PRIMARY KEY,
+  access_token_id INTEGER   REFERENCES github.access_token(id) ON DELETE CASCADE,
+  login           TEXT      NOT NULL
 );
 
 CREATE TABLE github.owner (

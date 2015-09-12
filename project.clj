@@ -18,6 +18,7 @@
                  [tentacles "0.3.0"]
 
                  ;; Everything below here is needed for Titan
+                 [org.clojure/tools.nrepl "0.2.10"]
                  [korma "0.4.2"]
                  [ragtime "0.5.2"]
                  [ring "1.4.0"]
@@ -57,17 +58,19 @@
                     :port "8080"
                     :session-key "california--bear"}
 
-              :repl-options {:port 7002
-                             :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+              :repl-options {:port 7002}
 
               :plugins [[jonase/eastwood "0.1.4"]
-                        [lein-figwheel "0.3.9"]]
+                        [lein-figwheel "0.3.9"]
+                        [mvxcvi/whidbey "1.0.0"]
+                        ]
+
+              :dependencies [[mvxcvi/whidbey "1.0.0"]]
 
               :eastwood {:exclude-linters [:deprecations]}
 
               :figwheel {:http-server-root "public"
                          :css-dirs ["resources/public/css"]
-                         :nrepl-port 7002
                          :ring-handler shrike.core/app}
 
               :cljsbuild {:test-commands {"test"
