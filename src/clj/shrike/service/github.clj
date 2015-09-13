@@ -29,6 +29,6 @@
            :all-pages true})))
 
 (defn me
-  [user]
   "Retrieve info on the current user."
+  [user]
   (users/me (auth-map user)))
