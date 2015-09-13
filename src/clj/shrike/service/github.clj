@@ -23,13 +23,12 @@
    have access to."
   [user]
   (repos/repos
-    (merge (auth-map user)
-           {:accept "application/vnd.github.moondragon+json"
-            :per-page 100
-            :all-pages true})))
+   (merge (auth-map user)
+          {:accept "application/vnd.github.moondragon+json"
+           :per-page 100
+           :all-pages true})))
 
 (defn me
   [user]
   "Retrieve info on the current user."
   (users/me (auth-map user)))
-

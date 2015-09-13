@@ -8,5 +8,9 @@
 
 (defentity github-oauth-state
   (table :github.oauth_state :github-oauth-state))
-(defentity github-access-token)
-(defentity github-user)
+
+(defentity github-access-token
+  (table :github.access_token :github-access-token))
+
+(defentity github-user
+  (table :github.user :github-user))

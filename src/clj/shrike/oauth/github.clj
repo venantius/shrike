@@ -35,7 +35,7 @@
   "POST to GitHub with the code from the callback."
   [code]
   (let [response (http/post "https://github.com/login/oauth/access_token"
-                            {:headers  {"Accept" "application/json"}
+                            {:accept :json
                              :query-params {:code code
                                             :client_id client-id
                                             :client_secret client-secret}})]

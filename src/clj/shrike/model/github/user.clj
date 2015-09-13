@@ -1,7 +1,8 @@
 (ns shrike.model.github.user
   "Functions for working with GitHub users"
   (:refer-clojure :exclude [update])
-  (:require [shrike.model :as db]
+  (:require [clojure.tools.logging :as log]
+            [shrike.model :as db]
             [shrike.model.github.access-token :as access-token]
             [shrike.service.github :as github]
             [titan.model :refer [defmodel]]
@@ -19,3 +20,14 @@
   (let [me (github/me {:github_access_token token})]
     (create-github-user! {:access_token_id id
                           :login (:login me)})))
+
+(defn create-or-update-from-access-token!
+  [{:keys [id token] :as at}]
+  (log/info at)
+  (if-let [maybe-user (fetch-one-github-user {:access_token_id id})]
+    (update-github-user!
+     (:id maybe-user)
+     {:access_token_id id})
+    (create-from-access-token!
+     {:id id
+      :token token})))

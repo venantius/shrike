@@ -19,8 +19,8 @@
 (defroutes app-routes
   (GET "/" [] spa)
 
-  (GET    "/oauth/github/login" req (gh-oauth/redirect req))
-  (GET    "/oauth/github"                [] gh-oauth/callback)
+  (GET    "/oauth/github/login" [] gh-oauth/redirect)
+  (GET    "/oauth/github/callback" [] gh-oauth/callback)
 
   (route/resources "/")
   (route/not-found "Whoops! Y'all found some shit that don't exist!"))
