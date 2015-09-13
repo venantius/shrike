@@ -2,6 +2,7 @@
   (:require [shrike.component.github]
             [shrike.component.navbar :as navbar]
             [shrike.component.statcard :as statcard]
+            [shrike.routes]
             [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]))

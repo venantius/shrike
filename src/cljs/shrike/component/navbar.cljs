@@ -41,7 +41,7 @@
             {:class "nav navbar-nav"}
             (dom/li
               (dom/a
-                {:href "/order-history"}
+                {:href "order-history"}
                 "Order History"))
             (dom/li
               {:class "active"}

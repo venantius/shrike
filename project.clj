@@ -13,6 +13,9 @@
                  [org.clojure/clojurescript "1.7.48"]
                  [org.omcljs/om "0.9.0"]
                  [prismatic/om-tools "0.3.12"]
+                 [secretary "1.2.3"]
+                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]
+                 [accountant "0.1.0-SNAPSHOT"]
 
                  ;; This section is for shrike
                  [tentacles "0.3.0"]

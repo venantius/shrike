@@ -7,17 +7,30 @@
             [ring.middleware.reload :refer [wrap-reload]]
             [ring.util.response :as resp]
             [shrike.controller.oauth.github :as gh-oauth]
+            [titan.middleware.auth :as auth]
             [titan.server :as server]))
 
 (defn spa
-  [req]
-  (log/warn "Index page requested")
+  []
   (resp/header
    (resp/resource-response "index.html" {:root "public"})
    "Content-Type" "text/html; charset=utf-8"))
 
+(def site-paths
+  ["/"
+   "/about"
+   "/order-history"
+   "/fluid"
+   "/pricing"])
+
+(defroutes site-routes
+  (rfn request
+    (when (auth/matches-any-path? site-paths request)
+      (spa))))
+
 (defroutes app-routes
-  (GET "/" [] spa)
+  ; api-routes
+  site-routes
 
   (GET    "/oauth/github/login" [] gh-oauth/redirect)
   (GET    "/oauth/github/callback" [] gh-oauth/callback)
