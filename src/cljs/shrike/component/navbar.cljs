@@ -65,7 +65,6 @@
                 "Light UI")))
           (dom/form
             {:class "form-inline navbar-form navbar-right"}
-            (if-let [user-id (user/logged-in?)]
+            (if (:user data)
               (om/build button/logout data)
               (om/build button/login data))))))))
-

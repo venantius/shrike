@@ -13,7 +13,9 @@
       {:class "btn btn-primary-outline"
        :role "button"
        :href "/oauth/github/login"}
-      "Login")))
+      "Login "
+      (dom/i
+        {:class "fa fa-github"}))))
 
 (defcomponent logout
   [data owner]

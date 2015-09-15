@@ -2,6 +2,7 @@
   (:require [shrike.component.github]
             [shrike.component.navbar :as navbar]
             [shrike.component.statcard :as statcard]
+            [shrike.component.tabs :as tabs]
             [shrike.cookies :as cookies]
             [shrike.routes]
             [om.core :as om]
@@ -30,11 +31,13 @@
   (render
     [_]
     (dom/div
-      {:class "row statcards"}
       (dom/div
-        (dom/h2
-        (pr-str data)))
-      (om/build-all statcard/statcard [1 2 3 4]))))
+        {:class "row statcards"}
+        (dom/div
+          (dom/h2
+          (pr-str data)))
+        (om/build-all statcard/statcard [1 2 3 4]))
+      (om/build tabs/tabs data))))
 
 (om/root
   statcards
