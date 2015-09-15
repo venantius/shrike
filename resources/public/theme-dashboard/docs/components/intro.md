@@ -4,7 +4,7 @@ Hey there! You're looking at the docs for an Official Bootstrap Theme—thanks f
 
 Each theme is designed as it's own toolkit—a series of well designed, intuitive, and cohesive components—built on top of Bootstrap. If you've used Bootstrap itself, you'll find this all super familiar, but with new aesthetics, new components, beautiful and extensive examples, and easy-to-use build tools and documentation.
 
-Since this theme is based on Bootstrap, and includes nearly everything Bootstrap itself does, you'll want to give the [official project documentation](http://getbootstrap.com) a once over before continuing. There's also [the kitchen sink]({{ site.baseurl }}/bootstrap/)—a one-page view of all Bootstrap's components restyled by this theme.
+Since this theme is based on Bootstrap, and includes nearly everything Bootstrap itself does, you'll want to give the [official project documentation](http://getbootstrap.com) a once over before continuing. There's also [the kitchen sink]({{ relative }}bootstrap/)—a one-page view of all Bootstrap's components restyled by this theme.
 
 For everything else, including compiling and using this Bootstrap theme, read through the docs below.
 
@@ -46,22 +46,18 @@ theme/
 
 ## Getting started
 
-Viewing your Bootstrap Theme documentation requires a static server to be running. For your convenience, if you have node installed, simply install dependencies with npm:
+To view your Bootstrap Theme documentation, simply find the docs directory and open index.html in your favorite browser.
 
 {% highlight bash %}
-$ npm install
-{% endhighlight %}
-
-and then start the documentation and example server with:
-
-{% highlight bash %}
-$ npm start
+$ open docs/index.html
 {% endhighlight %}
 
 
 ## Gulpfile.js
 
-We've also included a custom [Gulp](http://gulpjs.com) file, which can be used to quickly re-compile a theme's CSS and JS. You'll need to install Gulp before using our included `gulpfile.js`:
+If you're after more customization we've also included a custom [Gulp](http://gulpjs.com) file, which can be used to quickly re-compile a theme's CSS and JS. You'll need to install both [Node](https://nodejs.org/en/download/) and Gulp before using our included `gulpfile.js`.
+
+Once node is installed, run the following npm command to install Gulp.
 
 {% highlight bash %}
 $ npm install gulp -g

@@ -211,10 +211,19 @@
 @hr-divider-content-bg:     @body-bg;
 @hr-divider-before-bg:      @gray-light;
 
-@custom-select-color: @input-color;
-@custom-select-bg:    @input-bg;
+@custom-select-color:       @input-color;
+@custom-select-bg:          @input-bg;
+@custom-select-disabled-bg: @input-bg-disabled;
 
-@custom-control-indicator-bg: @input-bg;
+@custom-control-indicator-bg:     @input-bg;
+@custom-control-indicator-border: rgba(0,0,0,.15);
+
+@custom-control-indicator-checked-bg:      @brand-primary;
+@custom-control-indicator-checked-border:  @brand-primary;
+@custom-control-indicator-active-bg:       lighten(@brand-primary, 15%);
+@custom-control-indicator-active-border:   lighten(@brand-primary, 15%);
+@custom-control-indicator-disabled-bg:     darken(@input-bg, 5%);
+@custom-control-indicator-disabled-border: @custom-control-indicator-border;
 
 @sidebar-brand-color:          @gray;
 @sidebar-brand-hover-color:    @gray-dark;

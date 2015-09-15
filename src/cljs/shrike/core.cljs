@@ -2,6 +2,7 @@
   (:require [shrike.component.github]
             [shrike.component.navbar :as navbar]
             [shrike.component.statcard :as statcard]
+            [shrike.cookies :as cookies]
             [shrike.routes]
             [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
@@ -9,7 +10,7 @@
 
 (.log js/console "Successfully loaded shrike Frontend")
 
-(defonce app-state (atom {}))
+(defonce app-state (atom {:user {:id (cookies/get "id")}}))
 
 (defcomponent app-body
     [data owner]
@@ -30,6 +31,9 @@
     [_]
     (dom/div
       {:class "row statcards"}
+      (dom/div
+        (dom/h2
+        (pr-str data)))
       (om/build-all statcard/statcard [1 2 3 4]))))
 
 (om/root

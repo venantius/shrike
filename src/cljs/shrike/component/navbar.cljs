@@ -1,7 +1,9 @@
 (ns shrike.component.navbar
   (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
-            [om-tools.dom :as dom]))
+            [om-tools.dom :as dom]
+            [shrike.component.button :as button]
+            [shrike.user :as user]))
 
 (defcomponent navbar
   [data owner]
@@ -42,7 +44,8 @@
             (dom/li
               (dom/a
                 {:href "order-history"}
-                "Order History"))
+                (dom/span
+                "Order History")))
             (dom/li
               {:class "active"}
               (dom/a
@@ -62,12 +65,7 @@
                 "Light UI")))
           (dom/form
             {:class "form-inline navbar-form navbar-right"}
-            (dom/div
-              {:class "input-with-icon"}
-              (dom/input
-                {:class "form-control"
-                 :type "text"
-                 :placeholder "Search..."})
-              (dom/span
-                {:class "icon icon-magnifying-glass"}))))))))
+            (if-let [user-id (user/logged-in?)]
+              (om/build button/logout data)
+              (om/build button/login data))))))))
 

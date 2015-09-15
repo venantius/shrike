@@ -37,5 +37,4 @@
         (assoc
          (resp/redirect "/")
          :session {"id" {:value id :path "/"}}
-         :cookies {"id" {:value id :path "/"}
-                   "logged-in" {:value true :path "/"}})))))
+         :cookies {"id" {:value id :path "/"}})))))

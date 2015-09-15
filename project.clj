@@ -4,24 +4,23 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
-
-                 ;; Logging
-                 [org.clojure/tools.logging "0.3.1"]
-                 [org.slf4j/slf4j-log4j12 "1.7.12"]
+                 [org.clojure/clojurescript "1.7.48"]
+                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]
 
                  ;; ClojureScript
-                 [org.clojure/clojurescript "1.7.48"]
+                 [cljs-ajax "0.3.14"]
                  [org.omcljs/om "0.9.0"]
                  [prismatic/om-tools "0.3.12"]
                  [secretary "1.2.3"]
-                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]
-                 [accountant "0.1.0-SNAPSHOT"]
+                 [venantius/accountant "0.1.1"]
 
                  ;; This section is for shrike
                  [tentacles "0.3.0"]
 
                  ;; Everything below here is needed for Titan
+                 [org.clojure/tools.logging "0.3.1"]
                  [org.clojure/tools.nrepl "0.2.10"]
+                 [org.slf4j/slf4j-log4j12 "1.7.12"]
                  [korma "0.4.2"]
                  [ragtime "0.5.2"]
                  [ring "1.4.0"]
@@ -31,6 +30,7 @@
                  [prismatic/schema "1.0.1"]
                  [environ "1.0.0"]
                  [clj-time "0.11.0"]
+                 [cheshire "5.5.0"]
 
                  ;; Additional JDBC drivers may be required.
                  [org.postgresql/postgresql "9.4-1202-jdbc4"]]

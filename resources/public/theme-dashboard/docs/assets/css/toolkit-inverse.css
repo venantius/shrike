@@ -9189,6 +9189,10 @@ canvas {
   outline: 0;
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 255, 255, 0.6);
 }
+.custom-select:disabled {
+  background-color: #2d303a;
+  cursor: not-allowed;
+}
 .custom-select-sm {
   padding-top: 3px;
   padding-bottom: 3px;
@@ -9234,7 +9238,6 @@ canvas {
 /* Hover state */
 /* Uncomment if you need it, but be aware of the sticky iOS states.
 .control:hover .control-indicator {
-  color: #fff;
   background-color: #ccc;
 }
 */
@@ -9244,17 +9247,21 @@ canvas {
 }
 /* Checked state */
 .custom-control input:checked ~ .custom-control-indicator {
-  color: #fff;
   background-color: #1ca8dd;
   border-color: #1ca8dd;
   box-shadow: none;
 }
 /* Active */
 .custom-control input:active ~ .custom-control-indicator {
-  color: #fff;
   background-color: #5bc3ea;
   border-color: #5bc3ea;
   box-shadow: none;
+}
+.custom-control input:disabled ~ .custom-control-indicator {
+  background-color: #2d303a;
+  border-color: #2d303a;
+  box-shadow: none;
+  cursor: not-allowed;
 }
 /* Checkbox modifiers */
 .custom-checkbox .custom-control-indicator {

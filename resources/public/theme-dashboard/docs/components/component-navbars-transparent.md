@@ -3,7 +3,7 @@
 Use the new `.navbar-transparent` variation for placing navbars over backgrounds and interactive content.
 
 {% example html %}
-<div class="p-y-lg p-x" style="background: url({{ site.baseurl }}/assets/img/kanye.jpg) top center; background-size: cover">
+<div class="p-y-lg p-x" style="background: url({{ relative }}assets/img/kanye.jpg) top center; background-size: cover">
   <nav class="navbar navbar-transparent m-b-0">
     <div class="container-fluid">
       <div class="navbar-header">

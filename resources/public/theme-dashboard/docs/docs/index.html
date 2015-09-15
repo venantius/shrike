@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,12 +19,12 @@
 
     <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
     
-      <link href="/assets/css/toolkit-inverse.css" rel="stylesheet">
+      <link href="../assets/css/toolkit-inverse.css" rel="stylesheet">
     
     
-      <link href="/assets/css/docs.css" rel="stylesheet">
+      <link href="../assets/css/docs.css" rel="stylesheet">
     
-    <link href="/assets/css/application.css" rel="stylesheet">
+    <link href="../assets/css/application.css" rel="stylesheet">
 
     <style>
       /* note: this is a hack for ios iframe for bootstrap themes shopify page */
@@ -46,7 +49,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand navbar-brand-emphasized" href="/">
+        <a class="navbar-brand navbar-brand-emphasized" href="../index.html">
           <span class="icon icon-leaf navbar-brand-icon"></span>
           Dashboard
         </a>
@@ -54,24 +57,24 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li >
-            <a href="/">Overview</a>
+            <a href="../index.html">Overview</a>
           </li>
           <li >
-            <a href="/order-history">Order History</a>
+            <a href="../order-history/index.html">Order History</a>
           </li>
           <li >
-            <a href="/fluid">Fluid layout</a>
+            <a href="../fluid/index.html">Fluid layout</a>
           </li>
           <li >
-            <a href="/icon-nav">Icon nav</a>
+            <a href="../icon-nav/index.html">Icon nav</a>
           </li>
           <li class="active">
-            <a href="/docs">
+            <a href="../docs/index.html">
               Docs
             </a>
           </li>
           <li >
-            <a href="/light">Light UI</a>
+            <a href="../light/index.html">Light UI</a>
           </li>
         </ul>
       </div>
@@ -86,7 +89,8 @@
       </div>
     </div>
     <div class="container docs-content">
-      <h1 id="contents">Contents</h1>
+      
+<h1 id="contents">Contents</h1>
 
 <ul id="markdown-toc">
   <li><a href="#contents" id="markdown-toc-contents">Contents</a></li>
@@ -151,7 +155,7 @@
 
 <p>Each theme is designed as it’s own toolkit—a series of well designed, intuitive, and cohesive components—built on top of Bootstrap. If you’ve used Bootstrap itself, you’ll find this all super familiar, but with new aesthetics, new components, beautiful and extensive examples, and easy-to-use build tools and documentation.</p>
 
-<p>Since this theme is based on Bootstrap, and includes nearly everything Bootstrap itself does, you’ll want to give the <a href="http://getbootstrap.com">official project documentation</a> a once over before continuing. There’s also <a href="/bootstrap/">the kitchen sink</a>—a one-page view of all Bootstrap’s components restyled by this theme.</p>
+<p>Since this theme is based on Bootstrap, and includes nearly everything Bootstrap itself does, you’ll want to give the <a href="http://getbootstrap.com">official project documentation</a> a once over before continuing. There’s also <a href="../bootstrap/">the kitchen sink</a>—a one-page view of all Bootstrap’s components restyled by this theme.</p>
 
 <p>For everything else, including compiling and using this Bootstrap theme, read through the docs below.</p>
 
@@ -190,17 +194,15 @@
 
 <h2 id="getting-started">Getting started</h2>
 
-<p>Viewing your Bootstrap Theme documentation requires a static server to be running. For your convenience, if you have node installed, simply install dependencies with npm:</p>
+<p>To view your Bootstrap Theme documentation, simply find the docs directory and open index.html in your favorite browser.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>npm install</code></pre></div>
-
-<p>and then start the documentation and example server with:</p>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>npm start</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>open docs/index.html</code></pre></div>
 
 <h2 id="gulpfilejs">Gulpfile.js</h2>
 
-<p>We’ve also included a custom <a href="http://gulpjs.com">Gulp</a> file, which can be used to quickly re-compile a theme’s CSS and JS. You’ll need to install Gulp before using our included <code>gulpfile.js</code>:</p>
+<p>If you’re after more customization we’ve also included a custom <a href="http://gulpjs.com">Gulp</a> file, which can be used to quickly re-compile a theme’s CSS and JS. You’ll need to install both <a href="https://nodejs.org/en/download/">Node</a> and Gulp before using our included <code>gulpfile.js</code>.</p>
+
+<p>Once node is installed, run the following npm command to install Gulp.</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>npm install gulp -g</code></pre></div>
 
@@ -1310,6 +1312,41 @@
   <span class="nt">&lt;option&gt;</span>Last one<span class="nt">&lt;/option&gt;</span>
 <span class="nt">&lt;/select&gt;</span></code></pre></div>
 
+<p>Custom selects support the <code>disabled</code> attribute as well.</p>
+
+<div class="docs-example" data-example-id="">
+<select class="custom-select" disabled="">
+  <option>Default</option>
+  <option>First option</option>
+  <option>Another option</option>
+  <option>Alternative</option>
+  <option>Last one</option>
+</select>
+
+<select class="custom-select custom-select-sm" disabled="">
+  <option>Default</option>
+  <option>First option</option>
+  <option>Another option</option>
+  <option>Alternative</option>
+  <option>Last one</option>
+</select>
+</div>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;select</span> <span class="na">class=</span><span class="s">"custom-select"</span> <span class="na">disabled</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;option&gt;</span>Default<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;option&gt;</span>First option<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;option&gt;</span>Another option<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;option&gt;</span>Alternative<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;option&gt;</span>Last one<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+
+<span class="nt">&lt;select</span> <span class="na">class=</span><span class="s">"custom-select custom-select-sm"</span> <span class="na">disabled</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;option&gt;</span>Default<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;option&gt;</span>First option<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;option&gt;</span>Another option<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;option&gt;</span>Alternative<span class="nt">&lt;/option&gt;</span>
+  <span class="nt">&lt;option&gt;</span>Last one<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span></code></pre></div>
+
 <p>Custom checkboxes and radios are built on the default Bootstrap checkboxes and radios. Add a couple extra classes and the indicator and you should be all set.</p>
 
 <div class="docs-example" data-example-id="">
@@ -2080,11 +2117,11 @@
     </div>
   
 
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/chart.js"></script>
-    <script src="/assets/js/tablesorter.min.js"></script>
-    <script src="/assets/js/toolkit.js"></script>
-    <script src="/assets/js/application.js"></script>
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/chart.js"></script>
+    <script src="../assets/js/tablesorter.min.js"></script>
+    <script src="../assets/js/toolkit.js"></script>
+    <script src="../assets/js/application.js"></script>
     <script>
       // execute/clear BS loaders for docs
       $(function(){while(window.BS&&window.BS.loader&&window.BS.loader.length){(window.BS.loader.pop())()}})

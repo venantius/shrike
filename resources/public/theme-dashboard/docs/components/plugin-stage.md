@@ -37,7 +37,7 @@ For an interactive demo, refer to the `Menu` button at the top of this page. **T
 </div>
 {% endhighlight %}
 
-For a right-aligned stage shelf and button, the **minmal required markup looks like this:**
+For a right-aligned stage shelf and button, the **minimal required markup looks like this:**
 
 {% highlight html %}
 <div class="stage">

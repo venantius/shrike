@@ -1,6 +1,7 @@
 (ns shrike.core
   (:gen-class)
-  (:require [clojure.tools.logging :as log]
+  (:require [cheshire.core :as json]
+            [clojure.tools.logging :as log]
             [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer :all]
@@ -23,15 +24,33 @@
    "/fluid"
    "/pricing"])
 
+;; TODO: Move me into a controller
+(defn logout
+  [req]
+  {:body ""
+   :headers {"Content-Type" "text/html; charset: utf-8"}
+   :status 200
+   :session nil
+   :cookies {"id" {:value "" :max-age 0 :path "/"}}})
+
 (defroutes site-routes
   (rfn request
     (when (auth/matches-any-path? site-paths request)
       (spa))))
 
+(defn debug [request]
+  (log/info (str request))
+  {:status 200
+   :headers {"Content-Type" "application/json"}
+   :body (json/generate-string request)})
+
 (defroutes app-routes
   ; api-routes
   site-routes
 
+  (GET "/debug" [] debug)
+
+  (GET    "/logout" [] logout)
   (GET    "/oauth/github/login" [] gh-oauth/redirect)
   (GET    "/oauth/github/callback" [] gh-oauth/callback)
 

@@ -31,10 +31,18 @@ toolkit/
       └── toolkit.min.js
 ```
 
+#### Docs and Examples
+
+The `docs` directory contains all the static resources for your Themes docs and examples. To view, just open in your favorite browser!
+
+```
+$ open docs/index.html
+```
+
 
 #### Gulpfile.js
 
-Bootstrap Themes are built with Gulp, a build tool that compiles our CSS, JS, and docs with ease. You’ll need to install Node.js and Gulp before using our included gulpfile.js.
+We've also included an optional Gulp file to help you get started with theme customization. You’ll need to install Node.js and Gulp before using our included gulpfile.js.
 
 To install Node visit [https://nodejs.org/download](https://nodejs.org/download/).
 
@@ -50,13 +58,9 @@ When you’re done, install the rest of the theme's dependencies:
 $ npm install
 ```
 
-
-#### Gulp Tasks
-
-The two tasks immediately useful for you are `$ gulp` and `$ gulp docs`.
+From here on out, simply run `gulp` from your terminal and you're good to go!
 
 + `gulp` - recompiles and minifies your theme assets.
-+ `gulp docs` - starts the static doc server and opens it in your preferred browser.
 
 
 #### Support

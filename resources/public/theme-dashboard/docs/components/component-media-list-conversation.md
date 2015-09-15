@@ -14,12 +14,12 @@
       </div>
     </div>
     <a class="media-right" href="#">
-      <img class="img-circle media-object" src="{{ site.baseurl }}/assets/img/avatar-dhg.png">
+      <img class="img-circle media-object" src="{{ relative }}assets/img/avatar-dhg.png">
     </a>
   </li>
   <li class="media m-b-md">
     <a class="media-left" href="#">
-      <img class="img-circle media-object" src="{{ site.baseurl }}/assets/img/avatar-fat.jpg">
+      <img class="img-circle media-object" src="{{ relative }}assets/img/avatar-fat.jpg">
     </a>
     <div class="media-body">
       <div class="media-body-text">

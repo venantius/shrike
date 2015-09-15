@@ -20,6 +20,26 @@ Custom select menus can be easily created for browsers that support the styles.
 </select>
 {% endexample %}
 
+Custom selects support the `disabled` attribute as well.
+
+{% example html %}
+<select class="custom-select" disabled>
+  <option>Default</option>
+  <option>First option</option>
+  <option>Another option</option>
+  <option>Alternative</option>
+  <option>Last one</option>
+</select>
+
+<select class="custom-select custom-select-sm" disabled>
+  <option>Default</option>
+  <option>First option</option>
+  <option>Another option</option>
+  <option>Alternative</option>
+  <option>Last one</option>
+</select>
+{% endexample %}
+
 Custom checkboxes and radios are built on the default Bootstrap checkboxes and radios. Add a couple extra classes and the indicator and you should be all set.
 
 {% example html %}

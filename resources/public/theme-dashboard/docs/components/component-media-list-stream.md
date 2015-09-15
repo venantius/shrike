@@ -4,7 +4,7 @@
 <ul class="media-list media-list-stream c-w-md">
   <li class="media p-a">
     <a class="media-left" href="#">
-      <img class="media-object img-circle" src="{{ site.baseurl }}/assets/img/avatar-dhg.png">
+      <img class="media-object img-circle" src="{{ relative }}assets/img/avatar-dhg.png">
     </a>
     <div class="media-body">
       <div class="media-heading">
@@ -14,11 +14,11 @@
       <p>
         Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
       </p>
-      <img class="media-body-inline-img" src="{{ site.baseurl }}/assets/img/instagram_17.jpg">
+      <img class="media-body-inline-img" src="{{ relative }}assets/img/instagram_17.jpg">
       <ul class="media-list m-b">
         <li class="media">
           <a class="media-left" href="#">
-            <img class="media-object img-circle" src="{{ site.baseurl }}/assets/img/avatar-fat.jpg">
+            <img class="media-object img-circle" src="{{ relative }}assets/img/avatar-fat.jpg">
           </a>
           <div class="media-body">
             <strong>Jacon Thornton:</strong>
@@ -27,7 +27,7 @@
         </li>
         <li class="media">
           <a class="media-left" href="#">
-            <img class="media-object img-circle" src="{{ site.baseurl }}/assets/img/avatar-mdo.png">
+            <img class="media-object img-circle" src="{{ relative }}assets/img/avatar-mdo.png">
           </a>
           <div class="media-body">
             <strong>Mark Otto:</strong>
