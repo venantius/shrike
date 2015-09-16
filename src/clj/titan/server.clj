@@ -1,5 +1,5 @@
 (ns titan.server
-  (:require [aleph.http :as http]
+  (:require [ring.adapter.jetty :refer [run-jetty]]
             [clojure.tools.logging :as log]
             [ring.middleware.reload :refer [wrap-reload]]
             [titan.db :as db]
@@ -13,4 +13,4 @@
   (nrepl/start-server)
   (when (nil? @server)
     (log/infof "Starting Titan server on port %s..." port)
-    (reset! server (http/start-server app {:port port}))))
+    (reset! server (run-jetty app {:port port}))))

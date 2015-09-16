@@ -5,21 +5,22 @@
             [shrike.component.tabs :as tabs]
             [shrike.cookies :as cookies]
             [shrike.routes]
+            [shrike.state :refer [app-state]]
+            [shrike.view.dashboard :as dashboard]
             [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]))
 
 (.log js/console "Successfully loaded shrike Frontend")
 
-(defonce app-state (atom {:user {:id (cookies/get "id")}}))
-
 (defcomponent app-body
-    [data owner]
-    (render [_]
-            ;; Don't let this be a body tag! Otherwise BAD THINGS happen.
-            (dom/div
-              {:class "with-top-navbar"}
-            (om/build navbar/navbar data))))
+    [{:keys [repo] :as data} owner]
+    (render
+      [_]
+      ;; Don't let this be a body tag! Otherwise BAD THINGS happen.
+      (dom/div
+        (om/build navbar/navbar data)
+        (om/build dashboard/dashboard-view data))))
 
 (om/root
   app-body
@@ -33,11 +34,12 @@
     (dom/div
       (dom/div
         {:class "row statcards"}
-        (dom/div
-          (dom/h2
-          (pr-str data)))
-        (om/build-all statcard/statcard [1 2 3 4]))
-      (om/build tabs/tabs data))))
+        (om/build statcard/statcard-details data)
+        (om/build statcard/statcard-details-2 data)
+        (om/build statcard/statcard-coverage data)
+        (om/build statcard/statcard-deadcode data))
+      (om/build tabs/tabs data)
+      #_(om/build tabs/tab-content data))))
 
 (om/root
   statcards

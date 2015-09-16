@@ -26,6 +26,7 @@
                  [ring "1.4.0"]
                  [aleph "0.4.0"] ;; let's try Aleph
                  [ring/ring-defaults "0.1.5"]
+                 [ring/ring-jetty-adapter "1.4.0"]
                  [compojure "1.4.0"]
                  [prismatic/schema "1.0.1"]
                  [environ "1.0.0"]

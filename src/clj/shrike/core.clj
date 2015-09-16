@@ -20,6 +20,8 @@
 (def site-paths
   ["/"
    "/about"
+   "/repos"
+   "/code"
    "/order-history"
    "/fluid"
    "/pricing"])
