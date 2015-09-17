@@ -72,7 +72,7 @@
           {:class "p-a"}
           (dom/span
             {:class "statcard-desc"}
-            "LOC / Definition")
+            "Missing Docstrings")
           (dom/h2
             {:class "statcard-number"}
             "20"))
@@ -83,7 +83,7 @@
           {:class "p-a"}
           (dom/span
             {:class "statcard-desc"}
-            "Definitions / NS")
+            "Cleanup Opportunities")
           (dom/h2
             {:class "statcard-number"}
             "13"))))

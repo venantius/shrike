@@ -1,10 +1,7 @@
 (ns shrike.model
   "Database entities."
-  (:require [korma.core :refer [defentity
-                                table]]))
-
-(defentity user
-  (table :shrike.user :user))
+  (:refer-clojure :exclude [update])
+  (:require [korma.core :refer :all]))
 
 (defentity github-oauth-state
   (table :github.oauth_state :github-oauth-state))
@@ -13,4 +10,8 @@
   (table :github.access_token :github-access-token))
 
 (defentity github-user
-  (table :github.user :github-user))
+  (table :github.user :github-user)
+  (belongs-to github-access-token))
+
+(defentity build
+  (table :shrike.build :build))

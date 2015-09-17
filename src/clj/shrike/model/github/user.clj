@@ -2,6 +2,7 @@
   "Functions for working with GitHub users"
   (:refer-clojure :exclude [update])
   (:require [clojure.tools.logging :as log]
+            [korma.core :refer :all]
             [shrike.model :as db]
             [shrike.model.github.access-token :as access-token]
             [shrike.service.github :as github]
@@ -17,7 +18,7 @@
   "Given a user with a valid GitHub access token, create a GitHub user
    record in our database."
   [{:keys [id token] :as at}]
-  (let [me (github/me {:github_access_token token})]
+  (let [me (github/me {:token token})]
     (create-github-user! {:access_token_id id
                           :login (:login me)})))
 
@@ -31,3 +32,11 @@
     (create-from-access-token!
      {:id id
       :token token})))
+
+(defn fetch-one-github-user-with-access-token
+  [gh-user]
+  (first
+   (select db/github-user
+           (with db/github-access-token
+                 (fields [:token]))
+           (where gh-user))))

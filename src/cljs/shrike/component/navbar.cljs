@@ -51,11 +51,25 @@
                   (dom/span
                     "Dashboard")))
               (dom/li
+                (when (= view "/repos")
+                  {:class "active"})
+                (dom/a
+                  {:href "/repos"}
+                  (dom/span
+                    "Code Browser")))
+              (dom/li
+                (when (= view "/repos")
+                  {:class "active"})
+                (dom/a
+                  {:href "/repos"}
+                  (dom/span
+                    "Coverage")))
+              (dom/li
                 (when (= view "/code")
                   {:class "active"})
                 (dom/a
                   {:href "/code"}
-                  "Code Browser")))
+                  "Style")))
             (dom/form
               {:class "form-inline navbar-form navbar-right"}
               (if (:user data)
