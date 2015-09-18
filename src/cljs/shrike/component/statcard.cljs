@@ -11,8 +11,8 @@
       {:class "col-sm-6 col-md-3 m-t"}
       (dom/div
         {:class "statcard text-center"
-         :style {:margin-left "30px"
-                 :margin-right "30px"}}
+         :style {:margin-left "40px"
+                 :margin-right "40px"}}
         (dom/canvas
           {:class "ex-graph"
            :data-chart "doughnut"
@@ -34,8 +34,8 @@
       {:class "col-sm-6 col-md-3 m-t"}
       (dom/div
         {:class "statcard text-center"
-         :style {:margin-left "30px"
-                 :margin-right "30px"}}
+         :style {:margin-left "40px"
+                 :margin-right "40px"}}
         (dom/canvas
           {:class "ex-graph"
            :data-chart "doughnut"

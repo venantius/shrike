@@ -1,3 +1,6 @@
+
+-- NOTE: For all non-OAuth tables in the GitHub schema, an ID should be
+-- understood to be the GitHub object ID.
 CREATE SCHEMA github;
 
 CREATE TABLE github.oauth_state (
@@ -12,22 +15,15 @@ CREATE TABLE github.access_token (
 );
 
 CREATE TABLE github.user (
-  id              SERIAL    PRIMARY KEY,
-  access_token_id INTEGER   REFERENCES github.access_token(id) ON DELETE CASCADE,
-  login           TEXT      NOT NULL
-);
-
-CREATE TABLE github.owner (
-  id        INTEGER   PRIMARY KEY,
-  type      TEXT      ,
-  login     TEXT
+  id              INTEGER   PRIMARY KEY,
+  login           TEXT      NOT NULL,
+  type            TEXT      NOT NULL
 );
 
 CREATE TABLE github.repo (
   id        INTEGER   PRIMARY KEY,
-  owner_id  INTEGER   UNIQUE REFERENCES github.owner(id) ON DELETE CASCADE,
+  owner_id  INTEGER   UNIQUE REFERENCES github.user(id) ON DELETE CASCADE,
   name      TEXT      ,
-  full_name TEXT      ,
   private   BOOLEAN   ,
   fork      BOOLEAN
 );
@@ -42,12 +38,13 @@ CREATE TABLE github.commit (
 CREATE SCHEMA shrike;
 
 CREATE TABLE shrike.user (
-  id        SERIAL      PRIMARY KEY,
-  github_id INTEGER     UNIQUE REFERENCES github.user(id) ON DELETE CASCADE,
-  name      TEXT        NOT NULL,
-  email     TEXT        NOT NULL
+  id                      SERIAL      PRIMARY KEY,
+  github_user_id          INTEGER     UNIQUE REFERENCES github.user(id) ON DELETE CASCADE,
+  github_access_token_id  INTEGER     REFERENCES github.access_token(id) ON DELETE CASCADE,
+  name                    TEXT        NOT NULL
 );
 
+-- TODO: Create an index on this.
 CREATE TABLE shrike.followed_repo (
   id              INTEGER   PRIMARY KEY,
   github_user_id  INTEGER   REFERENCES github.user(id) ON DELETE CASCADE,

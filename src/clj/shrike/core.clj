@@ -5,16 +5,18 @@
             [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer :all]
+            [ring.middleware.json :refer [wrap-json-response]]
             [ring.middleware.reload :refer [wrap-reload]]
-            [ring.util.response :as resp]
+            [ring.util.response :as response]
             [shrike.controller.oauth.github :as gh-oauth]
+            [shrike.controller.repo.build :as build]
             [titan.middleware.auth :as auth]
             [titan.server :as server]))
 
 (defn spa
   []
-  (resp/header
-   (resp/resource-response "index.html" {:root "public"})
+  (response/header
+   (response/resource-response "index.html" {:root "public"})
    "Content-Type" "text/html; charset=utf-8"))
 
 (def site-paths
@@ -44,13 +46,16 @@
   (log/info (str request))
   {:status 200
    :headers {"Content-Type" "application/json"}
-   :body (json/generate-string request)})
+   :body (dissoc request :body)})
+
+(defroutes api-routes
+  (GET "/api/v0/repo/build" [] build/get-build))
 
 (defroutes app-routes
-  ; api-routes
+  (wrap-defaults (wrap-json-response api-routes) api-defaults)
   site-routes
 
-  (GET "/debug" [] debug)
+  (GET "/debug" [] (wrap-json-response debug))
 
   (GET    "/logout" [] logout)
   (GET    "/oauth/github/login" [] gh-oauth/redirect)

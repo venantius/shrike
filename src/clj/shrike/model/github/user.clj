@@ -14,24 +14,15 @@
    (s/optional-key :access_token_id) s/Int
    (s/optional-key :login) s/Str})
 
-(defn create-from-access-token!
-  "Given a user with a valid GitHub access token, create a GitHub user
-   record in our database."
-  [{:keys [id token] :as at}]
-  (let [me (github/me {:token token})]
-    (create-github-user! {:access_token_id id
-                          :login (:login me)})))
-
-(defn create-or-update-from-access-token!
-  [{:keys [id token] :as at}]
-  (log/info at)
-  (if-let [maybe-user (fetch-one-github-user {:access_token_id id})]
-    (update-github-user!
-     (:id maybe-user)
-     {:access_token_id id})
-    (create-from-access-token!
-     {:id id
-      :token token})))
+(defn fetch-or-create-from-access-token!
+  [{:keys [token] :as at}]
+  (let [{:keys [id login type] :as gh-user} (github/me {:token token})]
+    (if-let [maybe-user (fetch-one-github-user {:id id})]
+      maybe-user
+      (create-github-user!
+       {:id id
+        :login login
+        :type type}))))
 
 (defn fetch-one-github-user-with-access-token
   [gh-user]

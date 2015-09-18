@@ -5,7 +5,22 @@ INSERT INTO github.access_token VALUES (
 );
 
 INSERT INTO github.user VALUES (
-  100001,
-  100001,
-  'ursacorp-test-user'
+  14307759,
+  'ursacorp-test-user',
+  'User'
 );
+
+INSERT INTO github.user VALUES (
+  7268171,
+  'ursacorp-test-user',
+  'User'
+);
+
+INSERT INTO github.repo VALUES (
+  42705074,
+  7268171,
+  'test-repo',
+  true,
+  false
+);
+

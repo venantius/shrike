@@ -27,6 +27,7 @@
                  [aleph "0.4.0"] ;; let's try Aleph
                  [ring/ring-defaults "0.1.5"]
                  [ring/ring-jetty-adapter "1.4.0"]
+                 [ring/ring-json "0.4.0"]
                  [compojure "1.4.0"]
                  [prismatic/schema "1.0.1"]
                  [environ "1.0.0"]
@@ -65,7 +66,7 @@
               :repl-options {:port 7002}
 
               :plugins [[jonase/eastwood "0.1.4"]
-                        [lein-figwheel "0.3.9"]
+                        [lein-figwheel "0.4.0"]
                         [mvxcvi/whidbey "1.0.0"]
                         ]
 

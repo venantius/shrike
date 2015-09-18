@@ -1,5 +1,6 @@
 (ns shrike.core
   (:require [shrike.component.github]
+            [shrike.component.history :as history]
             [shrike.component.navbar :as navbar]
             [shrike.component.statcard :as statcard]
             [shrike.component.tabs :as tabs]
@@ -39,6 +40,7 @@
         (om/build statcard/statcard-coverage data)
         (om/build statcard/statcard-deadcode data))
       (om/build tabs/tabs data)
+      (om/build history/history data)
       #_(om/build tabs/tab-content data))))
 
 (om/root

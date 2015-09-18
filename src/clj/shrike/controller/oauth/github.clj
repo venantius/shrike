@@ -3,6 +3,7 @@
             [shrike.model.github.access-token :as access-token]
             [shrike.model.github.oauth-state :as oauth-state]
             [shrike.model.github.user :as gh-user]
+            [shrike.model.user :as user]
             [shrike.oauth.github :as oauth]
             [titan.http.response :as resp]
             [titan.util.token :as token]))
@@ -33,7 +34,7 @@
                           (access-token/map->github-access-token
                            {:token (:access_token at)
                             :scope (:scope at)}))
-            {:keys [id] :as user} (gh-user/create-or-update-from-access-token! access-token)]
+            {:keys [id] :as user} (user/create-or-update-from-access-token! access-token)]
         (assoc
          (resp/redirect "/")
          :session {"id" {:value id :path "/"}}

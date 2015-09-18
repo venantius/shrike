@@ -15,3 +15,6 @@
 
 (defentity build
   (table :shrike.build :build))
+
+(defentity user
+  (table :shrike.user :user))
