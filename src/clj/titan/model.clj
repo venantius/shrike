@@ -18,8 +18,11 @@
 
 (defn- fetch-one
   [entity]
-  (fn [params]
-    (first (korma/select entity (korma/where params)))))
+  (fn
+    ([]
+     (first (korma/select entity (korma/where {}))))
+    ([params]
+     (first (korma/select entity (korma/where params))))))
 
 (defn- update!
   [entity]

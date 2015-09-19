@@ -13,3 +13,8 @@
 
 (defn rollback []
   (repl/rollback (load-config)))
+
+(defn rollback-all
+  "Roll back the last Integer/MAX_VALUE migrations."
+  []
+  (repl/rollback (load-config) Integer/MAX_VALUE))

@@ -1,6 +1,8 @@
 (ns shrike.model.user
   "Core user namespace."
-  (:require [schema.core :as s]
+  (:refer-clojure :exclude [update])
+  (:require [korma.core :refer :all]
+            [schema.core :as s]
             [shrike.model :as db]
             [shrike.model.github.user :as gh-user]
             [titan.model :refer [defmodel]]))
@@ -20,9 +22,7 @@
   NOTE:
   Just because a GitHub user exists in our database does not mean there is a
   Shrike user for that account. This is because we keep track of the GitHub
-  owners of the repositories
-
-  "
+  owners of the repositories."
   [at]
   (let [gh-user (gh-user/fetch-or-create-from-access-token! at)]
     (if-let [user (fetch-one-user {:github_user_id (:id gh-user)})]
@@ -32,3 +32,11 @@
        {:github_user_id (:id gh-user)
         :github_access_token_id (:id at)
         :name (:login gh-user)}))))
+
+(defn fetch-one-user-with-access-token
+  [user]
+  (first
+   (select db/user
+           (with db/github-access-token
+                 (fields [:token]))
+           (where user))))

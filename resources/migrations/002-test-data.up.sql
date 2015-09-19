@@ -10,6 +10,13 @@ INSERT INTO github.user VALUES (
   'User'
 );
 
+INSERT INTO shrike.user VALUES (
+  1,
+  14307759,
+  100001,
+  'ursacorp-test-user'
+);
+
 INSERT INTO github.user VALUES (
   7268171,
   'ursacorp-test-user',
@@ -24,3 +31,8 @@ INSERT INTO github.repo VALUES (
   false
 );
 
+INSERT INTO github.commit VALUES (
+  100001,
+  42705074,
+  '394717ffc3fc54ffefac2ebba5a92470f904383a'
+);

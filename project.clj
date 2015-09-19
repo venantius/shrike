@@ -55,6 +55,9 @@
                                         :asset-path "js/out"
                                         :pretty-print  true}}}}
 
+  :test-selectors {:default (complement :integration)
+                   :all (constantly true)
+                   :integration :integration}
 
   :profiles {:dev
              {:env {:environment "dev"

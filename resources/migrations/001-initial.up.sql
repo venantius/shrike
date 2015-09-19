@@ -29,7 +29,7 @@ CREATE TABLE github.repo (
 );
 
 CREATE TABLE github.commit (
-  id        INTEGER   PRIMARY KEY,
+  id        SERIAL    PRIMARY KEY,
   repo_id   INTEGER   UNIQUE REFERENCES github.repo(id) ON DELETE CASCADE,
   sha       TEXT      NOT NULL
 );
