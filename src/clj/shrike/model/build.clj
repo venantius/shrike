@@ -30,10 +30,10 @@
      (k/with
       db/github-user
       (k/fields [:login :owner])
-      (k/where {:login user}))))
-   (k/with
-    db/github-commit
-    (k/fields :sha :message))))
+      (k/where {:login user})))
+    (k/with
+     db/github-commit
+     (k/fields :sha :message)))))
 
 (defn fetch-by-username-and-repo
   [user repo]
