@@ -14,20 +14,6 @@
 
 (.log js/console "Successfully loaded shrike Frontend")
 
-(defcomponent app-body
-    [{:keys [repo] :as data} owner]
-    (render
-      [_]
-      ;; Don't let this be a body tag! Otherwise BAD THINGS happen.
-      (dom/div
-        (om/build navbar/navbar data)
-        (om/build dashboard/dashboard-view data))))
-
-(om/root
-  app-body
-  app-state
-  {:target (. js/document (getElementById "my-app"))})
-
 (defcomponent statcards
   [data owner]
   (render
@@ -43,7 +29,25 @@
       (om/build history/history data)
       #_(om/build tabs/tab-content data))))
 
+(defcomponent app-body
+    [{:keys [view] :as data} owner]
+    (render
+      [_]
+      ;; Don't let this be a body tag! Otherwise BAD THINGS happen.
+      (dom/div
+        (om/build navbar/navbar data)
+        (condp = view
+          "/repos" (dom/h1 "RESPOS!")
+          "repo-dashboard" (dom/h1 "DASHBOARD!")
+          (dom/h1 "nomatch")
+
+          )
+        (om/build dashboard/dashboard-view data)
+        (dom/div
+          {:class "container-fluid container-fluid-spacious"}
+          (om/build statcards data)))))
+
 (om/root
-  statcards
+  app-body
   app-state
-  {:target (. js/document (getElementById "my-app2"))})
+  {:target (. js/document (getElementById "my-app"))})

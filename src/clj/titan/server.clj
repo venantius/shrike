@@ -5,12 +5,20 @@
             [titan.db :as db]
             [titan.server.nrepl :as nrepl]))
 
-(def server (atom nil))
+(defonce server (atom nil))
 
 (defn run-server
   [app {:keys [port] :or {port 5000} :as opts}]
   (db/set-korma-db)
   (nrepl/start-server)
-  (when (nil? @server)
-    (log/infof "Starting Titan server on port %s..." port)
-    (reset! server (run-jetty app {:port port}))))
+  (if (nil? @server)
+    (do
+      (log/infof "Starting Titan server on port %s..." port)
+      (reset! server (run-jetty app {:join? false
+                                     :port port})))
+    (log/error "The Titan server is already running. To restart the server, use `titan.server/restart`")))
+
+(defn restart-server
+  []
+  (.stop @server)
+  (.start @server))

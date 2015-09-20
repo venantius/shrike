@@ -10,8 +10,8 @@ INSERT INTO github.user VALUES (
   'User'
 );
 
-INSERT INTO shrike.user VALUES (
-  1,
+-- id 1
+INSERT INTO shrike.user (github_user_id, github_access_token_id, name) VALUES (
   14307759,
   100001,
   'ursacorp-test-user'

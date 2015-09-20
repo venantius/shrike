@@ -1,7 +1,8 @@
 (ns shrike.model.user
   "Core user namespace."
   (:refer-clojure :exclude [update])
-  (:require [korma.core :refer :all]
+  (:require [clojure.tools.logging :as log]
+            [korma.core :refer :all]
             [schema.core :as s]
             [shrike.model :as db]
             [shrike.model.github.user :as gh-user]

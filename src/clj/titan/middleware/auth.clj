@@ -2,8 +2,8 @@
   (:require [cemerick.url :refer [map->query url url-encode]]
             [clojure.tools.logging :as log]
             [clout.core :as clout]
-            [titan.http.response :as responses]
-            [ring.util.request :as req]))
+            [ring.util.request :as req]
+            [titan.http.response :as responses]))
 
 (defn matches-any-path?
   "Does this request match any of the paths?
@@ -17,54 +17,6 @@
   "Is this a blacklisted site route?"
   [request site-paths]
   (matches-any-path? site-paths request))
-
-;; TODO: actually check this against the whitelisted routes
-(defn route-whitelist-fn
-  "A function for whitelisting particular routes.
-
-  Whitelists our major resource routes first, then some API routes."
-  [path]
-  (cond
-    (or
-     (= path "/")
-     (.startsWith path "/css")
-     (.startsWith path "/fonts")
-     (.startsWith path "/images")
-     (.startsWith path "/js")
-     (.startsWith path "/templates")
-
-     (= path "/about")
-     (= path "/api")
-     (= path "/faq")
-     (= path "/integrations")
-     (= path "/password_reset")
-     (= path "/pricing")
-     (.startsWith path "/login")
-     (.startsWith path "/new_password")
-     (.startsWith path "/signup")
-
-     (= path "/debug")
-     (= path "/api/v1/email")
-     (= path "/api/v1/email/send")
-     (= path "/api/v1/login")
-     (= path "/api/v1/user")
-     (= path "/api/v1/gravatar")
-     (= path "/api/v1/password_reset")
-     (= path "/api/v1/new_password")) true
-    :else false))
-
-(defn darg-auth-fn
-  "The Darg authentication function."
-  [{:keys [session] :as request}]
-  (if-let [id (:id session)]
-    {:id id}))
-
-;; TODO - this is definitely incomplete
-(defn github-auth-fn
-  "Verify that this Darg user actually has authn/authz with GitHub"
-  [{:keys [user] :as request}]
-  (log/warn user)
-  request)
 
 (defn redirect-to-signin
   [request]
@@ -88,9 +40,8 @@
   (fn [request]
     (if (whitelist (req/path-info request))
       (handler request)
-      (let [user (auth-fn request)]
-        (if user
-          (handler (assoc request :user user))
-          (if (is-site-route? request site-paths)
-            (redirect-to-signin request)
-            (responses/unauthorized "User not authenticated.")))))))
+      (if-let [user (auth-fn request)]
+        (handler (assoc request :user user))
+        (if (matches-any-path? site-paths request)
+          (redirect-to-signin request)
+          (responses/unauthorized "User not authenticated."))))))

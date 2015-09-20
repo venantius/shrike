@@ -37,5 +37,5 @@
             {:keys [id] :as user} (user/create-or-update-from-access-token! access-token)]
         (assoc
          (resp/redirect "/")
-         :session {"id" {:value id :path "/"}}
+         :session {:id id}
          :cookies {"id" {:value id :path "/"}})))))

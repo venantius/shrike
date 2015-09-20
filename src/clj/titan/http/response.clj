@@ -16,7 +16,8 @@
 (defn unauthorized
   [message]
   {:status 401
-   :body {:message message}})
+   :headers {"Content-Type" "text/html"}
+   :body message})
 
 (defn not-found
   [message]

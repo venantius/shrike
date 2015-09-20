@@ -72,6 +72,6 @@
                   "Style")))
             (dom/form
               {:class "form-inline navbar-form navbar-right"}
-              (if (:user data)
+              (if (:id (:user data))
                 (om/build button/logout data)
                 (om/build button/login data)))))))))
