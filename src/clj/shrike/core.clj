@@ -9,7 +9,7 @@
             [ring.middleware.reload :refer [wrap-reload]]
             [ring.util.response :as response]
             [shrike.controller.oauth.github :as gh-oauth]
-            [shrike.controller.repo.build :as build]
+            [shrike.controller.github.user.repo.build :as build]
             [titan.middleware.auth :as auth]
             [titan.server :as server]))
 
@@ -25,8 +25,9 @@
    "/repos"
    "/code"
    "/order-history"
-   "/fluid"
-   "/pricing"])
+
+   "/gh/:username/:repo"
+   "/gh/:username/:repo/:build_id"])
 
 ;; TODO: Move me into a controller
 (defn logout
@@ -49,7 +50,8 @@
    :body (dissoc request :body)})
 
 (defroutes api-routes
-  (GET "/api/v0/repo/build" [] build/get-build))
+  (GET "/api/:username/:repo/build/:build_id" [] build/get)
+  (GET "/api/:username/:repo/build"           [] build/list))
 
 (defroutes app-routes
   (wrap-defaults (wrap-json-response api-routes) api-defaults)

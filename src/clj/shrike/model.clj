@@ -14,13 +14,16 @@
   (belongs-to github-access-token))
 
 (defentity github-repo
-  (table :github.repo :github-repo))
+  (table :github.repo :github-repo)
+  (belongs-to github-user {:fk :owner_id}))
 
 (defentity github-commit
   (table :github.commit :github-commit))
 
 (defentity build
-  (table :shrike.build :build))
+  (table :shrike.build :build)
+  (belongs-to github-repo {:fk :github_repo_id})
+  (belongs-to github-commit {:fk :github_commit_id}))
 
 (defentity user
   (table :shrike.user :user)

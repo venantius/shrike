@@ -19,8 +19,8 @@ INSERT INTO shrike.user VALUES (
 
 INSERT INTO github.user VALUES (
   7268171,
-  'ursacorp-test-user',
-  'User'
+  'ursacorp',
+  'Organization'
 );
 
 INSERT INTO github.repo VALUES (
@@ -34,5 +34,36 @@ INSERT INTO github.repo VALUES (
 INSERT INTO github.commit VALUES (
   100001,
   42705074,
-  '394717ffc3fc54ffefac2ebba5a92470f904383a'
+  '394717ffc3fc54ffefac2ebba5a92470f904383a',
+  'Initial commit'
+);
+
+INSERT INTO shrike.build (
+  repo_build_id,
+  github_repo_id,
+  github_commit_id,
+  lines_of_code,
+  definitions
+  ) VALUES (
+  100001,
+  42705074,
+  100001,
+  0,
+  0
+);
+
+INSERT INTO shrike.build (
+  repo_build_id,
+  github_repo_id,
+  github_commit_id,
+  status,
+  lines_of_code,
+  definitions
+  ) VALUES (
+  100002,
+  42705074,
+  100001,
+  'Running',
+  10,
+  5
 );

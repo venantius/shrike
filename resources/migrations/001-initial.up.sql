@@ -31,7 +31,8 @@ CREATE TABLE github.repo (
 CREATE TABLE github.commit (
   id        SERIAL    PRIMARY KEY,
   repo_id   INTEGER   UNIQUE REFERENCES github.repo(id) ON DELETE CASCADE,
-  sha       TEXT      NOT NULL
+  sha       TEXT      NOT NULL,
+  message   TEXT
 );
 
 
@@ -56,6 +57,9 @@ CREATE TABLE shrike.build (
   repo_build_id     INTEGER     NOT NULL,
   github_repo_id    INTEGER     REFERENCES github.repo(id) ON DELETE CASCADE,
   github_commit_id  INTEGER     REFERENCES github.commit(id) ON DELETE CASCADE,
+  started_at        TIMESTAMP   NOT NULL DEFAULT NOW(),
+  finished_at       TIMESTAMP   ,
+  status            TEXT        NOT NULL DEFAULT 'Starting',
   lines_of_code     BIGINT      NOT NULL DEFAULT 0,
   definitions       BIGINT      NOT NULL DEFAULT 0
 );

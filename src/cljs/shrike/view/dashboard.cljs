@@ -19,9 +19,11 @@
              "Dashboard")
            (dom/h2
              {:class "dashhead-title"}
-             (str (:org repo) "/" (:name repo)))))
+             (str (:org repo) "/" (:name repo))
+             #_(.stringify js/JSON (clj->js (:builds repo)))
+             )))
       (dom/div
         {:class "hr-divider m-t m-b-md"}
         (dom/h3
           {:class "hr-divider-content hr-divider-heading"}
-          "Quick stats")))))
+          "Latest stats")))))

@@ -52,7 +52,7 @@
                                         :preamble      ["react/react.min.js"]
                                         :optimizations :none
                                         :main "shrike.core"
-                                        :asset-path "js/out"
+                                        :asset-path "/js/out"
                                         :pretty-print  true}}}}
 
   :test-selectors {:default (complement :integration)
