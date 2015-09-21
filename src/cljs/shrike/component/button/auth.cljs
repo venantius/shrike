@@ -1,4 +1,4 @@
-(ns shrike.component.button
+(ns shrike.component.button.auth
   "Buttons!!!"
   (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]

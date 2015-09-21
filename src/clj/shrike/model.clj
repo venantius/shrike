@@ -28,3 +28,8 @@
 (defentity user
   (table :shrike.user :user)
   (belongs-to github-access-token {:fk :github_access_token_id}))
+
+(defentity followed-repo
+  (table :shrike.followed_repo)
+  (belongs-to user)
+  (belongs-to github-repo {:fk :github_repo_id}))

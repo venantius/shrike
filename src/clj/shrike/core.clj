@@ -1,7 +1,6 @@
 (ns shrike.core
   (:gen-class)
-  (:require [cheshire.core :as json]
-            [clojure.tools.logging :as log]
+  (:require [clojure.tools.logging :as log]
             [compojure.core :refer :all]
             [compojure.route :as route]
             [environ.core :as env]
@@ -13,6 +12,8 @@
             [shrike.auth :refer [auth-fn]]
             [shrike.controller.oauth.github :as gh-oauth]
             [shrike.controller.github.user.repo.build :as build]
+            [shrike.controller.github.user.repo :as gh-repo]
+            [shrike.controller.user.repo :as repo]
             [titan.middleware.auth :as auth]
             [titan.server :as server]))
 
@@ -24,10 +25,8 @@
 
 (def site-paths
   ["/"
-   "/about"
    "/repos"
-   "/code"
-   "/order-history"
+   "/repos/add"
 
    "/gh/:username/:repo"
    "/gh/:username/:repo/:build_id"])
@@ -73,7 +72,10 @@
 
 (defroutes api-routes
   (GET "/api/:username/:repo/build/:build_id" [] build/get)
-  (GET "/api/:username/:repo/build"           [] build/list))
+  (GET "/api/:username/:repo/build"           [] build/list)
+
+  (GET "/api/github/user/repo"                [] gh-repo/list)
+  (GET "/api/user/repo"                       [] repo/list))
 
 (defroutes site-routes
   (rfn request

@@ -19,8 +19,8 @@
       (dom/td
         {:class "col-md-2"}
         (dom/a
-          "#"
-          (:build_id build)))
+          {:href "#"}
+          (str "#" (:build_id build))))
       (dom/td
         {:class "col-md-2"}
         (subs (:sha build) 0 10))

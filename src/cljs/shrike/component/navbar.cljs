@@ -2,7 +2,7 @@
   (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]
-            [shrike.component.button :as button]
+            [shrike.component.button.auth :as auth]
             [shrike.user :as user]))
 
 (defcomponent navbar
@@ -44,34 +44,14 @@
             (dom/ul
               {:class "nav navbar-nav"}
               (dom/li
-                (when (= view "/repos")
+                (when (= view "repo-list")
                   {:class "active"})
                 (dom/a
                   {:href "/repos"}
                   (dom/span
-                    "Dashboard")))
-              (dom/li
-                (when (= view "/repos")
-                  {:class "active"})
-                (dom/a
-                  {:href "/repos"}
-                  (dom/span
-                    "Code Browser")))
-              (dom/li
-                (when (= view "/repos")
-                  {:class "active"})
-                (dom/a
-                  {:href "/repos"}
-                  (dom/span
-                    "Coverage")))
-              (dom/li
-                (when (= view "/code")
-                  {:class "active"})
-                (dom/a
-                  {:href "/code"}
-                  "Style")))
+                    "Repositories"))))
             (dom/form
               {:class "form-inline navbar-form navbar-right"}
               (if (:id (:user data))
-                (om/build button/logout data)
-                (om/build button/login data)))))))))
+                (om/build auth/logout data)
+                (om/build auth/login data)))))))))

@@ -3,15 +3,20 @@
             [accountant.core :as accountant]
             [om.core :as om]
             [shrike.api.build :as build]
+            [shrike.api.repo :as repo]
             [shrike.state :refer [app-state]]))
 
 (defroute "/" {}
   (swap! app-state assoc :view "/")
   (js/console.log "Dashboard view"))
 
-(defroute "/repos" {:as params}
-  (swap! app-state assoc :view "/repos")
-  (js/console.log (str "User: " (:id params))))
+(defroute repo-list "/repos" {:as params}
+  (swap! app-state assoc :view "repo-list")
+  (repo/get-followed-repos))
+
+(defroute add-repos "/repos/add" {:as params}
+  (swap! app-state assoc :view "add-repo")
+  (repo/get-github-repos))
 
 (defroute repo-dashboard "/gh/:username/:repo"
   {:keys [repo username] :as params}

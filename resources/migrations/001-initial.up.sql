@@ -47,9 +47,8 @@ CREATE TABLE shrike.user (
 
 -- TODO: Create an index on this.
 CREATE TABLE shrike.followed_repo (
-  id              INTEGER   PRIMARY KEY,
-  github_user_id  INTEGER   REFERENCES github.user(id) ON DELETE CASCADE,
-  github_repo     INTEGER   REFERENCES github.repo(id) ON DELETE CASCADE
+  user_id         INTEGER   REFERENCES shrike.user(id) ON DELETE CASCADE,
+  github_repo_id  INTEGER   REFERENCES github.repo(id) ON DELETE CASCADE
 );
 
 CREATE TABLE shrike.build (
