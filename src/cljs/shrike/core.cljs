@@ -3,6 +3,7 @@
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]
             [shrike.component.navbar :as navbar]
+            [shrike.event :as event]
             [shrike.routes]
             [shrike.state :refer [app-state]]
             [shrike.view.dashboard :as dashboard]
@@ -21,7 +22,14 @@
         "add-repo"        (om/build repo/add-repo-view data)
         "repo-list"       (om/build repo/followed-repo-list data)
         "repo-dashboard"  (om/build dashboard/dashboard-view data)
-        (dom/h1 "nomatch")))))
+        (dom/h1 "nomatch"))))
+  ;; Need these for the Chart.js charts. Former in dev, latter in prod.
+  (did-mount
+    [_]
+    (event/trigger-chart-redraw))
+  (did-update
+    [_ _ _]
+    (event/trigger-chart-redraw)))
 
 (om/root
   app-body

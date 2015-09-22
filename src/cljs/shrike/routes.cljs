@@ -4,6 +4,7 @@
             [om.core :as om]
             [shrike.api.build :as build]
             [shrike.api.repo :as repo]
+            [shrike.event :as event]
             [shrike.state :refer [app-state]]))
 
 (defroute "/" {}

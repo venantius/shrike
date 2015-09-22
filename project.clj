@@ -9,6 +9,7 @@
 
                  ;; ClojureScript
                  [cljs-ajax "0.3.14"]
+                 [jayq "2.5.4"]
                  [org.omcljs/om "0.9.0"]
                  [prismatic/om-tools "0.3.12"]
                  [secretary "1.2.3"]

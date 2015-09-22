@@ -39,6 +39,7 @@
   [user repo]
   (k/select
    db/build
+   (k/order :build_id :DESC)
    (k/fields [:repo_build_id :build_id] :started_at :status)
    (k/with
     db/github-repo
