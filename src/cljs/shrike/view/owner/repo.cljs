@@ -1,27 +1,20 @@
-(ns shrike.view.dashboard
+(ns shrike.view.owner.repo
   "High level template for the Shrike dashboard view."
   (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]
-            [shrike.component.statcard :as statcard]
             [shrike.component.tabs :as tabs]
             [shrike.component.history :as history]))
 
-(defcomponent statcards
+(defcomponent repo-dashboard-statcards
   [data owner]
   (render
    [_]
    (dom/div
-    (dom/div
-     {:class "row statcards"}
-     (om/build statcard/statcard-details data)
-     (om/build statcard/statcard-details-2 data)
-     (om/build statcard/statcard-coverage data)
-     (om/build statcard/statcard-deadcode data))
     (om/build tabs/tabs data)
     (om/build history/history data))))
 
-(defcomponent dashboard-view
+(defcomponent repo-dashboard
   [{:keys [repo] :as data} owner]
   (render
    [_]
@@ -37,9 +30,5 @@
       (dom/h2
        {:class "dashhead-title"}
        (str (:org repo) "/" (:name repo)))))
-    (dom/div
-     {:class "hr-divider m-t m-b-md"}
-     (dom/h3
-      {:class "hr-divider-content hr-divider-heading"}
-      "Latest stats"))
-    (om/build statcards data))))
+    (om/build repo-dashboard-statcards data))))
+

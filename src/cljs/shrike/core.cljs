@@ -6,7 +6,8 @@
             [shrike.event :as event]
             [shrike.routes]
             [shrike.state :refer [app-state]]
-            [shrike.view.dashboard :as dashboard]
+            [shrike.view.owner.repo :as repo-view]
+            [shrike.view.owner.repo.build :as build-view]
             [shrike.view.repo :as repo]))
 
 (.log js/console "Successfully loaded shrike Frontend")
@@ -21,7 +22,8 @@
     (condp = view
       "add-repo"        (om/build repo/add-repo-view data)
       "repo-list"       (om/build repo/followed-repo-list data)
-      "repo-dashboard"  (om/build dashboard/dashboard-view data)
+      "repo-dashboard"  (om/build repo-view/repo-dashboard data)
+      "build-summary"   (om/build build-view/build-summary data)
       (dom/h1 "nomatch"))))
   ;; Need these for the Chart.js charts. Former in dev, latter in prod.
   (did-mount

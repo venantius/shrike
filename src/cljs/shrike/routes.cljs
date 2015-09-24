@@ -22,8 +22,12 @@
 (defroute repo-dashboard "/gh/:username/:repo"
   {:keys [repo username] :as params}
   (build/get-build username repo)
-  (swap! app-state assoc :view "repo-dashboard")
-  (js/console.log "Loading main repo view page" repo username))
+  (swap! app-state assoc :view "repo-dashboard"))
+
+(defroute build-summary "/gh/:username/:repo/:build_id"
+  {:keys [repo username] :as params}
+  (build/get-build username repo)
+  (swap! app-state assoc :view "build-summary"))
 
 (defroute "/code" {:as params}
   (swap! app-state assoc :view "/code")
