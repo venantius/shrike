@@ -7,6 +7,6 @@
   [username repo]
   (GET
     (format "/api/%s/%s/build" username repo)
-     {:response-format :json
-      :keywords? true
-      :handler (fn [r] (swap! app-state assoc-in [:repo :builds] r))}))
+    {:response-format :json
+     :keywords? true
+     :handler (fn [r] (swap! app-state assoc-in [:repo :builds] r))}))

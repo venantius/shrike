@@ -14,24 +14,24 @@
 (defcomponent app-body
   [{:keys [view] :as data} owner]
   (render
-    [_]
+   [_]
     ;; Don't let this be a body tag! Otherwise BAD THINGS happen.
-    (dom/div
-      (om/build navbar/navbar data)
-      (condp = view
-        "add-repo"        (om/build repo/add-repo-view data)
-        "repo-list"       (om/build repo/followed-repo-list data)
-        "repo-dashboard"  (om/build dashboard/dashboard-view data)
-        (dom/h1 "nomatch"))))
+   (dom/div
+    (om/build navbar/navbar data)
+    (condp = view
+      "add-repo"        (om/build repo/add-repo-view data)
+      "repo-list"       (om/build repo/followed-repo-list data)
+      "repo-dashboard"  (om/build dashboard/dashboard-view data)
+      (dom/h1 "nomatch"))))
   ;; Need these for the Chart.js charts. Former in dev, latter in prod.
   (did-mount
-    [_]
-    (event/trigger-chart-redraw))
+   [_]
+   (event/trigger-chart-redraw))
   (did-update
-    [_ _ _]
-    (event/trigger-chart-redraw)))
+   [_ _ _]
+   (event/trigger-chart-redraw)))
 
 (om/root
-  app-body
-  app-state
-  {:target (. js/document (getElementById "my-app"))})
+ app-body
+ app-state
+ {:target (. js/document (getElementById "my-app"))})

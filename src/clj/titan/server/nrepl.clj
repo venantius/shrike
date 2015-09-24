@@ -8,7 +8,7 @@
   ([]
    (start-server {}))
   ([{:keys [port]
-    :or {port 7002}
-    :as opts}]
-    (log/infof "Starting nREPL server on port %s..." port)
-    #_(nrepl/start-server :port port)))
+     :or {port 7002}
+     :as opts}]
+   (log/infof "Starting nREPL server on port %s..." port)
+   #_(nrepl/start-server :port port)))

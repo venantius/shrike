@@ -7,9 +7,9 @@
 (defcomponent tabs
   [data owner]
   (render
-    [_]
-    (dom/div
-      {:class "hr-divider m-y-md"}
-      (dom/ul
-        {:class "hr-divider-content hr-divider-heading"}
-        "Build history"))))
+   [_]
+   (dom/div
+    {:class "hr-divider m-y-md"}
+    (dom/ul
+     {:class "hr-divider-content hr-divider-heading"}
+     "Build history"))))

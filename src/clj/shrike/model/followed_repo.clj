@@ -11,10 +11,11 @@
 (defn fetch-with-full-repo-info
   [fr]
   (k/select
-    db/followed-repo
-    (k/where fr)
-    (k/with db/github-repo
-      (k/fields :name)
-      (k/with
-        db/github-user
-        (k/fields :login)))))
+   db/followed-repo
+   (k/fields :github_repo_id)
+   (k/where fr)
+   (k/with db/github-repo
+           (k/fields :name)
+           (k/with
+            db/github-user
+            (k/fields :login)))))

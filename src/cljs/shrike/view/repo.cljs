@@ -5,48 +5,66 @@
             [om-tools.dom :as dom]
             [shrike.nav :as nav]))
 
-(defcomponent followed-repo-list
-  [data owner]
+(defcomponent repo-statcard
+  [{:keys [login name] :as data} owner]
   (render
     [_]
     (dom/div
-      {:class "container-fluid container-fluid-spacious"}
-      (dom/h2 "Followed Repositories")
-      (dom/div
-        {:class "hr-divider m-t m-b-md"})
-      (dom/div
-        {:class "row"}
-        (for [i (:followed-repos (:user data))]
-          (dom/div
-            {:class "col-xs-3"}
-            (dom/div
-              {:class "statcard statcard-primary p-a-md"
-               :role "button"
+     {:class "col-xs-12 col-md-3"}
+     (dom/div
+      {:class "statcard statcard-primary text-center p-a-md "
+       :role "button"
+       :on-click #(nav/go-to-repo-dashboard! login name)}
+      (dom/h3
+       {:class "statcard-number"}
+       name)
+      (dom/span
+       {:class "statcard-desc"}
+       login)))))
 
-               :on-click #(nav/go-to-repo-dashboard! (:login i) (:name i))
-               }
-              (dom/h3
-                {:class "statcard-number"}
-                (:name i))
-              (dom/span
-                {:class "statcard-desc"}
-                (:login i))
-              )))))))
+(defcomponent repo-owner-section
+  [data owner]
+   (render
+    [_]
+    (dom/div
+      (let [org-name (first data)]
+      (dom/div
+       {:class "hr-divider m-t-md m-b"}
+       (dom/h3
+        {:class "hr-divider-content hr-divider-heading"}
+        (clj->js org-name))))
+      (dom/div
+       {:class "row"}
+       (om/build-all repo-statcard (second data))))))
+
+(defcomponent followed-repo-list
+  [{:keys [user] :as data} owner]
+  (render
+   [_]
+   (dom/div
+    {:class "container-fluid container-fluid-spacious"}
+    (dom/div
+     {:class "dashhead m-t-md"}
+     (dom/h6
+       {:class "dashhead-subtitle"}
+       "Repositories")
+     (dom/h2 "Followed Repos")
+     (om/build-all repo-owner-section (:followed-repos user))))))
 
 (defcomponent add-repo-view
   [data owner]
   (render
-    [_]
-    (dom/div
-      {:class "container-fluid container-fluid-spacious"}
-      (dom/h2 "Follow Repository")
-      (dom/ul
-        {:class "list-group"}
-        (for [i (:repo-list (:user data))]
-          (dom/li
-            {:class "list-group-item"}
-            i
-            (dom/button
-              {:class "btn btn-xs btn-primary-outline pull-right"}
-              "Follow"))))
-      #_(.stringify js/JSON (clj->js (:repo-list  (:user data)))))))
+   [_]
+   (dom/div
+    {:class "container-fluid container-fluid-spacious"}
+    (dom/h2 "Follow Repository")
+    (dom/ul
+     {:class "list-group"}
+     (for [i (:repo-list (:user data))]
+       (dom/li
+        {:class "list-group-item"}
+        i
+        (dom/button
+         {:class "btn btn-xs btn-primary-outline pull-right"}
+         "Follow"))))
+    #_(.stringify js/JSON (clj->js (:repo-list  (:user data)))))))

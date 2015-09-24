@@ -5,4 +5,4 @@
 (defn go-to-repo-dashboard!
   [username repo]
   (accountant/navigate!
-    (string/format "/gh/%s/%s" username repo)))
+   (string/format "/gh/%s/%s" username repo)))
