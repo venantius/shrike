@@ -43,11 +43,7 @@
        {:class "nav navbar-nav"}
        (dom/li
         (when (= view "repo-list")
-          {:class "active"})
-        (dom/a
-         {:href "/repos"}
-         (dom/span
-          "Repositories"))))
+          {:class "active"})))
       (dom/form
        {:class "form-inline navbar-form navbar-right"}
        (if (:id (:user data))

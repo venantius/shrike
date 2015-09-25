@@ -7,9 +7,9 @@
             [shrike.event :as event]
             [shrike.state :refer [app-state]]))
 
-(defroute "/" {}
-  (swap! app-state assoc :view "/")
-  (js/console.log "Dashboard view"))
+(defroute dashboard "/" {}
+  (swap! app-state assoc :view "dashboard")
+  (repo/get-followed-repos))
 
 (defroute repo-list "/repos" {:as params}
   (swap! app-state assoc :view "repo-list")
@@ -22,16 +22,12 @@
 (defroute repo-dashboard "/gh/:username/:repo"
   {:keys [repo username] :as params}
   (build/get-build username repo)
-  (swap! app-state assoc :view "repo-dashboard"))
+  (swap! app-state assoc :view "dashboard"))
 
 (defroute build-summary "/gh/:username/:repo/:build_id"
   {:keys [repo username] :as params}
   (build/get-build username repo)
   (swap! app-state assoc :view "build-summary"))
-
-(defroute "/code" {:as params}
-  (swap! app-state assoc :view "/code")
-  (js/console.log (str "User: " (:id params))))
 
 (secretary/dispatch! (.-pathname (.-location js/window)))
 

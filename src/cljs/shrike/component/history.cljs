@@ -42,7 +42,7 @@
    [_]
    (dom/div
     (dom/div
-     {:class "well well-lg table-full"
+     {:class "well table-full"
       :style {:background-color "#252830"}}
      (dom/div
       {:class "table-responsive"}
