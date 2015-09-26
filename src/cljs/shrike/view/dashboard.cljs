@@ -26,15 +26,14 @@
      (let [org-name (first data)]
        (dom/li
          {:class "nav-header"}
-         (first data)))
+       org-name))
      (om/build-all repo (second data))
      (dom/li
        {:class "nav-divider"}))))
 
-(defn yo
+(defn to-owner-coll
   [coll repo]
-  (update coll  (:owner repo) conj repo))
-
+  (update coll (:owner repo) conj repo))
 
 (defcomponent dashboard
   [{:keys [user] :as data} owner]
@@ -61,7 +60,9 @@
          (dom/div
            {:class "p-l-0 well p-r-md"
             :style {:background-color "#252830"}}
-           (om/build-all repo-sidebar (reduce yo {} (:followed-repos user)))
+           (om/build-all
+             repo-sidebar
+             (sort (reduce to-owner-coll {} (:followed-repos user))))
            (dom/ul
              {:class "nav nav-bordered nav-stacked"}
             (dom/li

@@ -14,7 +14,7 @@
 
 (defn add-new-followed-repo-to-state
   [r]
-  (swap! app-state update-in[:user :followed-repos] conj r))
+  (swap! app-state update-in [:user :followed-repos] conj r))
 
 (defn follow-new-repo
   "Add a new repository to the list of repos this user follows."
