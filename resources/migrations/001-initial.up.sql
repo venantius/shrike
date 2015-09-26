@@ -24,6 +24,7 @@ CREATE TABLE github.repo (
   id        INTEGER   PRIMARY KEY,
   owner_id  INTEGER   NOT NULL REFERENCES github.user(id) ON DELETE CASCADE,
   name      TEXT      NOT NULL,
+  full_name TEXT      NOT NULL,
   private   BOOLEAN   NOT NULL,
   fork      BOOLEAN   NOT NULL
 );

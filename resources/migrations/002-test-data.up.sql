@@ -39,6 +39,7 @@ INSERT INTO github.repo VALUES (
   42705074,
   7268171,
   'test-repo',
+  'ursacorp/test-repo',
   true,
   false
 );

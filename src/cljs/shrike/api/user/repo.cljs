@@ -12,6 +12,10 @@
      :keywords? true
      :handler (fn [r] (swap! app-state assoc-in [:user :followed-repos] r))}))
 
+(defn add-new-followed-repo-to-state
+  [r]
+  (swap! app-state update-in[:user :followed-repos] conj r))
+
 (defn follow-new-repo
   "Add a new repository to the list of repos this user follows."
   [repo]
@@ -22,7 +26,7 @@
      :headers {:X-CSRF-Token (csrf-token)}
      :params repo
      :keywords? true
-     :handler (fn [r] (js/console.log (clj->js r)) (swap! app-state assoc-in [:user :followed-repos :id] r))}))
+     :handler (fn [r] (js/console.log (clj->js r)) (add-new-followed-repo-to-state r))}))
 
 (defn get-github-repos
   []

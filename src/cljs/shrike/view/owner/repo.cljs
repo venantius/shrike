@@ -5,9 +5,8 @@
             [om-tools.dom :as dom]
             [shrike.component.history :as history]))
 
-(defcomponent repo-dashboard-statcards
+(defcomponent repo-build-history
   [data owner]
   (render
    [_]
    (om/build history/history data)))
-

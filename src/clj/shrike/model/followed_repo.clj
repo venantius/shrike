@@ -12,12 +12,12 @@
   [fr]
   (k/select
    db/followed-repo
-   (k/fields :github_repo_id)
+   (k/fields [:github_repo_id :id])
    (k/where fr)
    (k/with db/github-repo
-           (k/fields :name)
-           (k/order :name :DESC)
+           (k/fields :name :full_name)
+           (k/order :full_name :DESC)
            (k/with
             db/github-user
             (k/order :login :DESC)
-            (k/fields :login)))))
+            (k/fields [:login :owner])))))

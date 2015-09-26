@@ -37,6 +37,11 @@
      {:class "row"}
      (om/build-all repo-statcard (second data))))))
 
+(defn yo
+  [coll repo]
+  (update coll  (:login repo) conj repo))
+
+
 (defcomponent followed-repo-list
   [{:keys [user] :as data} owner]
   (render
@@ -49,4 +54,5 @@
       {:class "dashhead-subtitle"}
       "Repositories")
      (dom/h2 "Followed Repos")
-     (om/build-all repo-owner-section (:followed-repos user))))))
+     (js/console.log (clj->js (:followed-repos user)))
+     (om/build-all repo-owner-section (reduce yo (:followed-repos user)))))))

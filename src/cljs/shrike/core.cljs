@@ -2,9 +2,9 @@
   (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]
-            [shrike.api.auth :as auth]
             [shrike.component.navbar :as navbar]
             [shrike.event :as event]
+            [shrike.init :as init]
             [shrike.routes]
             [shrike.state :refer [app-state]]
             [shrike.view.dashboard :as dashboard]
@@ -41,4 +41,4 @@
  app-state
  {:target (. js/document (getElementById "my-app"))})
 
-(auth/get-csrf-token)
+(init/init)
