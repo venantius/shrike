@@ -20,7 +20,9 @@
         followed-repo-ids (into #{} (map :github_repo_id followed-repos))]
     {:status 200
      :body (map
-             (partial flag-followed-repos followed-repo-ids)
+            (partial flag-followed-repos followed-repo-ids)
+            (map
+             #(assoc % :owner (select-keys (:owner %) [:login :type :id]))
              (map
-               #(select-keys % [:id :full_name])
-               (repo/repos user)))}))
+              #(select-keys % [:id :name :full_name :private :fork :owner])
+              (repo/repos user))))}))

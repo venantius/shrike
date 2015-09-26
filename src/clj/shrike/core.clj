@@ -5,11 +5,12 @@
             [compojure.route :as route]
             [environ.core :as env]
             [ring.middleware.defaults :refer :all]
-            [ring.middleware.json :refer [wrap-json-response]]
+            [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
             [ring.middleware.reload :refer [wrap-reload]]
             [ring.middleware.session.cookie :refer [cookie-store]]
             [ring.util.response :as response]
             [shrike.auth :refer [auth-fn]]
+            [shrike.controller.auth :refer [csrf-token]]
             [shrike.controller.oauth.github :as gh-oauth]
             [shrike.controller.github.user.repo.build :as build]
             [shrike.controller.github.user.repo :as gh-repo]
@@ -25,8 +26,8 @@
 
 (def site-paths
   ["/"
-   "/repos"
-   "/repos/add"
+   "/user/repos"
+   "/user/repos/add"
 
    "/gh/:username/:repo"
    "/gh/:username/:repo/:build_id"])
@@ -71,11 +72,12 @@
     :else false))
 
 (defroutes api-routes
-  (GET "/api/:username/:repo/build/:build_id" [] build/get)
-  (GET "/api/:username/:repo/build"           [] build/list)
+  (GET  "/api/:username/:repo/build/:build_id" [] build/get)
+  (GET  "/api/:username/:repo/build"           [] build/list)
 
-  (GET "/api/github/user/repo"                [] gh-repo/list)
-  (GET "/api/user/repo"                       [] repo/list))
+  (GET  "/api/github/user/repo"                [] gh-repo/list)
+  (GET  "/api/user/repo"                       [] repo/list)
+  (POST "/api/user/repo"                       [] repo/create!))
 
 (defroutes site-routes
   (rfn request
@@ -83,11 +85,15 @@
       (spa))))
 
 (defroutes app-routes
-  (wrap-defaults (wrap-json-response api-routes) api-defaults)
+  (wrap-defaults (wrap-json-body (wrap-json-response api-routes) {:keywords? true}) api-defaults)
   site-routes
 
   (GET    "/debug" [] (wrap-json-response debug))
+
+  ;; not whitelisted
   (GET    "/secure-debug" [] (wrap-json-response debug))
+
+  (GET    "/user/csrf-token" [] csrf-token)
 
   (GET    "/logout" [] logout)
   (GET    "/oauth/github/login" [] gh-oauth/redirect)

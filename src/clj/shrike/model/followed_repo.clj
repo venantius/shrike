@@ -16,6 +16,8 @@
    (k/where fr)
    (k/with db/github-repo
            (k/fields :name)
+           (k/order :name :DESC)
            (k/with
             db/github-user
+            (k/order :login :DESC)
             (k/fields :login)))))

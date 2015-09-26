@@ -26,16 +26,10 @@
      (let [org-name (first data)]
        (dom/li
          {:class "nav-header"}
-         (clj->js org-name)))
-     (om/build-all repo (second data))
+         (:login data)))
+     (om/build-all repo (:repos data))
      (dom/li
-       {:class "nav-divider"})
-     (dom/li
-       (dom/a
-         {:href "/repos/add"}
-         "Add new repo "
-         (dom/span
-           {:class "icon icon-circle-with-plus"}))))))
+       {:class "nav-divider"}))))
 
 (defcomponent dashboard
   [{:keys [user] :as data} owner]
@@ -48,7 +42,15 @@
     (dom/div
       {:class "col-md-2 p-l-0 well p-r-md"
        :style {:background-color "#252830"}}
-      (om/build-all repo-sidebar (:followed-repos user)))
+      (om/build-all repo-sidebar (:followed-repos user))
+      (dom/ul
+        {:class "nav nav-bordered nav-stacked"}
+       (dom/li
+         (dom/a
+           {:href "/user/repos/add"}
+           "Add new repo "
+           (dom/span
+             {:class "icon icon-circle-with-plus"})))))
     (dom/div
       {:class "col-md-10"}
       (om/build owner-repo/repo-dashboard-statcards data)))))

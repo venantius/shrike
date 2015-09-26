@@ -22,15 +22,15 @@ CREATE TABLE github.user (
 
 CREATE TABLE github.repo (
   id        INTEGER   PRIMARY KEY,
-  owner_id  INTEGER   UNIQUE REFERENCES github.user(id) ON DELETE CASCADE,
-  name      TEXT      ,
-  private   BOOLEAN   ,
-  fork      BOOLEAN
+  owner_id  INTEGER   NOT NULL REFERENCES github.user(id) ON DELETE CASCADE,
+  name      TEXT      NOT NULL,
+  private   BOOLEAN   NOT NULL,
+  fork      BOOLEAN   NOT NULL
 );
 
 CREATE TABLE github.commit (
   id        SERIAL    PRIMARY KEY,
-  repo_id   INTEGER   UNIQUE REFERENCES github.repo(id) ON DELETE CASCADE,
+  repo_id   INTEGER   NOT NULL REFERENCES github.repo(id) ON DELETE CASCADE,
   sha       TEXT      NOT NULL,
   message   TEXT
 );
@@ -47,15 +47,15 @@ CREATE TABLE shrike.user (
 
 -- TODO: Create an index on this.
 CREATE TABLE shrike.followed_repo (
-  user_id         INTEGER   REFERENCES shrike.user(id) ON DELETE CASCADE,
-  github_repo_id  INTEGER   REFERENCES github.repo(id) ON DELETE CASCADE
+  user_id         INTEGER   NOT NULL REFERENCES shrike.user(id) ON DELETE CASCADE,
+  github_repo_id  INTEGER   NOT NULL REFERENCES github.repo(id) ON DELETE CASCADE
 );
 
 CREATE TABLE shrike.build (
   id                SERIAL      PRIMARY KEY,
   repo_build_id     INTEGER     NOT NULL,
-  github_repo_id    INTEGER     REFERENCES github.repo(id) ON DELETE CASCADE,
-  github_commit_id  INTEGER     REFERENCES github.commit(id) ON DELETE CASCADE,
+  github_repo_id    INTEGER     NOT NULL REFERENCES github.repo(id) ON DELETE CASCADE,
+  github_commit_id  INTEGER     NOT NULL REFERENCES github.commit(id) ON DELETE CASCADE,
   started_at        TIMESTAMP   NOT NULL DEFAULT NOW(),
   finished_at       TIMESTAMP   ,
   status            TEXT        NOT NULL DEFAULT 'Starting',

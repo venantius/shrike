@@ -3,7 +3,7 @@
             [accountant.core :as accountant]
             [om.core :as om]
             [shrike.api.build :as build]
-            [shrike.api.repo :as repo]
+            [shrike.api.user.repo :as repo]
             [shrike.event :as event]
             [shrike.state :refer [app-state]]))
 
@@ -11,11 +11,11 @@
   (swap! app-state assoc :view "dashboard")
   (repo/get-followed-repos))
 
-(defroute repo-list "/repos" {:as params}
+(defroute repo-list "/user/repos" {:as params}
   (swap! app-state assoc :view "repo-list")
   (repo/get-followed-repos))
 
-(defroute add-repos "/repos/add" {:as params}
+(defroute add-repos "/user/repos/add" {:as params}
   (swap! app-state assoc :view "add-repo")
   (repo/get-github-repos))
 

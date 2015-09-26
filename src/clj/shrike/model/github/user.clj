@@ -11,8 +11,8 @@
 
 (defmodel db/github-user
   {(s/optional-key :id) s/Int
-   (s/optional-key :access_token_id) s/Int
-   (s/optional-key :login) s/Str})
+   (s/optional-key :login) s/Str
+   (s/optional-key :type) s/Str})
 
 (defn fetch-or-create-from-access-token!
   [{:keys [token] :as at}]

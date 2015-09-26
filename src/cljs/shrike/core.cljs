@@ -2,6 +2,7 @@
   (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]
+            [shrike.api.auth :as auth]
             [shrike.component.navbar :as navbar]
             [shrike.event :as event]
             [shrike.routes]
@@ -9,7 +10,8 @@
             [shrike.view.dashboard :as dashboard]
             [shrike.view.owner.repo :as repo-view]
             [shrike.view.owner.repo.build :as build-view]
-            [shrike.view.repo :as repo]))
+            [shrike.view.repo :as repo]
+            [shrike.view.user.repo.add :as add-repo-view]))
 
 (.log js/console "Successfully loaded shrike Frontend")
 
@@ -22,7 +24,7 @@
     (om/build navbar/navbar data)
     (condp = view
       "dashboard"       (om/build dashboard/dashboard data)
-      "add-repo"        (om/build repo/add-repo-view data)
+      "add-repo"        (om/build add-repo-view/add-repo-view data)
       "repo-list"       (om/build repo/followed-repo-list data)
       "build-summary"   (om/build build-view/build-summary data)
       (dom/h1 "nomatch"))))
@@ -38,3 +40,5 @@
  app-body
  app-state
  {:target (. js/document (getElementById "my-app"))})
+
+(auth/get-csrf-token)
