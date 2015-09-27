@@ -72,12 +72,13 @@
     :else false))
 
 (defroutes api-routes
-  (GET  "/api/:username/:repo/build/:build_id" [] build/get)
-  (GET  "/api/:username/:repo/build"           [] build/list)
+  (GET    "/api/:username/:repo/build/:build_id" [] build/get)
+  (GET    "/api/:username/:repo/build"           [] build/list)
 
-  (GET  "/api/github/user/repo"                [] gh-repo/list)
-  (GET  "/api/user/repo"                       [] repo/list)
-  (POST "/api/user/repo"                       [] repo/create!))
+  (GET    "/api/github/user/repo"                [] gh-repo/list)
+  (GET    "/api/user/repo"                       [] repo/list)
+  (POST   "/api/user/repo"                       [] repo/create!)
+  (DELETE "/api/user/repo/:id"                   [] repo/delete!))
 
 (defroutes site-routes
   (rfn request

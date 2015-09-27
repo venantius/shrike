@@ -37,3 +37,11 @@
                  :github_repo_id id})]
         {:status 200
          :body (first (followed-repo/fetch-with-full-repo-info fr))}))))
+
+(defn delete!
+  [{:keys [user params] :as request}]
+  (followed-repo/delete-followed-repo!
+   (followed-repo/map->followed-repo
+    {:user_id (:id user)
+     :github_repo_id (:id params)}))
+  (resp/ok "Repo successfully unfollowed"))

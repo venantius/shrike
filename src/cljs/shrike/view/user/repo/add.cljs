@@ -40,9 +40,10 @@
             (:full_name repo)
             (if (followed? followed-repo-ids repo)
               (dom/button
-               {:class "btn btn-xs btn-danger-outline pull-right"}
+               {:class "btn btn-xs btn-danger-outline pull-right"
+                :on-click #(repo-api/unfollow-repo repo)}
                "Stop following")
               (dom/button
                {:class "btn btn-xs btn-primary-outline pull-right"
-                :on-click #(repo-api/follow-new-repo (clj->js repo))}
+                :on-click #(repo-api/follow-new-repo repo)}
                "Follow"))))))))))
