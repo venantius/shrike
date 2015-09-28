@@ -7,7 +7,6 @@ export DOCKER_TAG=quay.io/venantius/${CIRCLE_PROJECT_REPONAME}:$NOW-${CIRCLE_SHA
 
 sed "s#<QUAY_AUTH>#$QUAY_AUTH#" < .dockercfg.template > $HOME/.dockercfg
 docker build -t ${DOCKER_TAG} .
-docker tag -f ${DOCKER_TAG}
-quay.io/venantius/${CIRCLE_PROJECT_REPONAME}:latest
+docker tag -f ${DOCKER_TAG} quay.io/venantius/${CIRCLE_PROJECT_REPONAME}:latest
 docker push ${DOCKER_TAG}
 docker push quay.io/venantius/${CIRCLE_PROJECT_REPONAME}:latest
