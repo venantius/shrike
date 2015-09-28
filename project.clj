@@ -119,4 +119,5 @@
                                              :compiler
                                              {:optimizations :advanced
                                               :pretty-print false}}}}}}
+  :uberjar-name "shrike.jar"
   )

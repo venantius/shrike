@@ -1,0 +1,19 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Authentication": {
+    "Bucket": "ursacorp-credentials",
+    "Key": "dockercfg"
+  },
+  "Image": {
+    "Name": "quay.io/venantius/shrike",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "8080"
+    }
+  ],
+  "Volumes": [
+  ],
+  "Logging": "/var/log/nginx"
+}
