@@ -4,7 +4,19 @@ machine:
   services:
     - docker
 
+dependencies:
+  pre:
+    - wget -O ~/bin/jq https://stedolan.github.io/jq/download/linux64/jq && chmod 755 ~/bin/jq
+    - sudo pip install awscli
+
 test:
   override:
     - lein trampoline eastwood
     - lein trampoline test :all
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - source ./scripts/quay-deploy.sh
+      - source ./scripts/eb-deploy.sh

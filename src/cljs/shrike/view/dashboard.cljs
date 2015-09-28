@@ -55,8 +55,7 @@
     (dom/div
      {:class "hr-divider m-b"}
      (dom/h3
-      {:class "hr-divider-content hr-divider-heading"}
-      "Build list"))
+      {:class "hr-divider-content"}))
     (dom/div
      {:class "row"}
      (dom/div

@@ -13,7 +13,7 @@
                  [org.omcljs/om "0.9.0"]
                  [prismatic/om-tools "0.3.12"]
                  [secretary "1.2.3"]
-                 [venantius/accountant "0.1.2-SNAPSHOT"]
+                 [venantius/accountant "0.1.2"]
 
                  ;; This section is for shrike
                  [tentacles "0.3.0"]
