@@ -8,6 +8,7 @@
             [shrike.routes]
             [shrike.state :refer [app-state]]
             [shrike.view.dashboard :as dashboard]
+            [shrike.view.landing.outer :as landing]
             [shrike.view.owner.repo :as repo-view]
             [shrike.view.owner.repo.build :as build-view]
             [shrike.view.repo :as repo]
@@ -23,6 +24,10 @@
    (dom/div
     (om/build navbar/navbar data)
     (condp = view
+      ;; outer
+      "landing"         (om/build landing/outer data)
+
+      ;; inner
       "dashboard"       (om/build dashboard/dashboard data)
       "add-repo"        (om/build add-repo-view/add-repo-view data)
       "repo-list"       (om/build repo/followed-repo-list data)

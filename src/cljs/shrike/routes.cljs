@@ -5,11 +5,15 @@
             [shrike.api.build :as build]
             [shrike.api.user.repo :as repo]
             [shrike.event :as event]
-            [shrike.state :refer [app-state]]))
+            [shrike.state :refer [app-state]]
+            [shrike.user :as user]))
 
-(defroute dashboard "/" {}
-  (swap! app-state assoc :view "dashboard")
-  (repo/get-followed-repos))
+(defroute root "/" {}
+  (when (user/logged-in?)
+    (swap! app-state assoc :view "dashboard")
+    (repo/get-followed-repos))
+  (when-not (user/logged-in?)
+    (swap! app-state assoc :view "landing")))
 
 (defroute repo-list "/user/repos" {:as params}
   (swap! app-state assoc :view "repo-list")
@@ -22,6 +26,7 @@
 (defroute repo-dashboard "/gh/:username/:repo"
   {:keys [repo username] :as params}
   (build/get-build username repo)
+  (swap! app-state assoc :repo {:org username :name repo})
   (swap! app-state assoc :view "dashboard"))
 
 (defroute build-summary "/gh/:username/:repo/:build_id"

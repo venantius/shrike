@@ -36,7 +36,10 @@
                  [cheshire "5.5.0"]
 
                  ;; Additional JDBC drivers may be required.
-                 [org.postgresql/postgresql "9.4-1202-jdbc4"]]
+                 [org.postgresql/postgresql "9.4-1202-jdbc4"]
+
+                 ;; This may not stick around
+                 [mvxcvi/whidbey "1.0.0"]]
 
   :plugins [[lein-cljsbuild "1.0.5"]
             [lein-environ "1.0.0"]]
@@ -74,8 +77,6 @@
                         [mvxcvi/whidbey "1.0.0"]
                         ]
 
-              :dependencies [[mvxcvi/whidbey "1.0.0"]]
-
               :eastwood {:exclude-linters [:deprecations]}
 
               :figwheel {:http-server-root "public"
@@ -112,6 +113,7 @@
                        :env {:production true}
                        :omit-source true
                        :aot :all
+                       :prep-tasks ["compile" ["cljsbuild" "once"]]
                        :cljsbuild {:builds {:app
                                             {:jar true
                                              :compiler

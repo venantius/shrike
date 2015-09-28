@@ -5,93 +5,92 @@
             [om-tools.dom :as dom]
             [shrike.component.statcard :as statcard]))
 
-
 (defcomponent build-blurb
   [data owner]
   (render
    [_]
    (dom/div
+    (dom/div
+     {:class "hr-divider"}
+     (dom/ul
+      {:class "hr-divider-content hr-divider-heading"}
+      "Build Details"))
+    (dom/div
+     {:class "row statcards"}
      (dom/div
-      {:class "hr-divider"}
-      (dom/ul
-       {:class "hr-divider-content hr-divider-heading"}
-       "Build Details"))
+      {:class "col-sm-6 col-md-2"}
+      (dom/div
+       {:class "statcard"}
+       (dom/div
+        {:class "p-a"}
+        (dom/span
+         {:class "statcard-desc"}
+         "Build ID")
+        (dom/h4
+         {:class "statcard-number"}
+         "100001"))))
      (dom/div
-       {:class "row statcards"}
+      {:class "col-sm-6 col-md-2"}
+      (dom/div
+       {:class "statcard"}
        (dom/div
-         {:class "col-sm-6 col-md-2"}
-         (dom/div
-           {:class "statcard"}
-           (dom/div
-             {:class "p-a"}
-             (dom/span
-               {:class "statcard-desc"}
-               "Build ID")
-             (dom/h4
-               {:class "statcard-number"}
-               "100001"))))
+        {:class "p-a"}
+        (dom/span
+         {:class "statcard-desc"}
+         "Push ref.")
+        (dom/a
+         {:href "#"}
+         (dom/h4
+          {:class "statcard-number"}
+          "394717ffc3")))))
+     (dom/div
+      {:class "col-sm-6 col-md-2"}
+      (dom/div
+       {:class "statcard"}
        (dom/div
-         {:class "col-sm-6 col-md-2"}
-         (dom/div
-           {:class "statcard"}
-           (dom/div
-             {:class "p-a"}
-             (dom/span
-               {:class "statcard-desc"}
-               "Status")
-             (dom/h4
-               {:class "statcard-number"}
-               "Running"))))
+        {:class "p-a"}
+        (dom/span
+         {:class "statcard-desc"}
+         "Author")
+        (dom/h4
+         {:class "statcard-number"}
+         "David Jarvis"))))
+     (dom/div
+      {:class "col-sm-6 col-md-2"}
+      (dom/div
+       {:class "statcard"}
        (dom/div
-         {:class "col-sm-6 col-md-2"}
-         (dom/div
-           {:class "statcard"}
-           (dom/div
-             {:class "p-a"}
-             (dom/span
-               {:class "statcard-desc"}
-               "Push Ref")
-             (dom/a
-               {:href "#"}
-               (dom/h4
-                 {:class "statcard-number"}
-                 "394717ffc3")))))
+        {:class "p-a"}
+        (dom/span
+         {:class "statcard-desc"}
+         "Started")
+        (dom/h4
+         {:class "statcard-number"}
+         "5 mins ago"))))
+     (dom/div
+      {:class "col-sm-6 col-md-2"}
+      (dom/div
+       {:class "statcard"}
        (dom/div
-         {:class "col-sm-6 col-md-2"}
-         (dom/div
-           {:class "statcard"}
-           (dom/div
-             {:class "p-a"}
-             (dom/span
-               {:class "statcard-desc"}
-               "Author")
-             (dom/h4
-               {:class "statcard-number"}
-               "David Jarvis"))))
+        {:class "p-a"}
+        (dom/span
+         {:class "statcard-desc"}
+         "Duration")
+        (dom/h4
+         {:class "statcard-number"}
+         "5m 20s"))))
+     (dom/div
+      {:class "col-sm-6 col-md-2"}
+      (dom/div
+       {:class "statcard"}
        (dom/div
-         {:class "col-sm-6 col-md-2"}
-         (dom/div
-           {:class "statcard"}
-           (dom/div
-             {:class "p-a"}
-             (dom/span
-               {:class "statcard-desc"}
-               "Started")
-             (dom/h4
-               {:class "statcard-number"}
-               "5 mins ago"))))
-       (dom/div
-         {:class "col-sm-6 col-md-2"}
-         (dom/div
-           {:class "statcard"}
-           (dom/div
-             {:class "p-a"}
-             (dom/span
-               {:class "statcard-desc"}
-               "Duration")
-             (dom/h4
-               {:class "statcard-number"}
-               "5m 20s"))))))))
+        {:class "p-a"}
+        (dom/span
+         {:class "statcard-desc"}
+         "Status")
+        (dom/h4
+         {:class "statcard-number"}
+         "Running"))))))))
 
 (defcomponent build-statcards
   [data owner]

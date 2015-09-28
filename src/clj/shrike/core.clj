@@ -10,7 +10,7 @@
             [ring.middleware.session.cookie :refer [cookie-store]]
             [ring.util.response :as response]
             [shrike.auth :refer [auth-fn]]
-            [shrike.controller.auth :refer [csrf-token]]
+            [shrike.controller.auth :refer [csrf-token logout]]
             [shrike.controller.oauth.github :as gh-oauth]
             [shrike.controller.github.user.repo.build :as build]
             [shrike.controller.github.user.repo :as gh-repo]
@@ -31,15 +31,6 @@
 
    "/gh/:username/:repo"
    "/gh/:username/:repo/:build_id"])
-
-;; TODO: Move me into a controller
-(defn logout
-  [req]
-  {:body ""
-   :headers {"Content-Type" "text/html; charset: utf-8"}
-   :status 200
-   :session nil
-   :cookies {"id" {:value "" :max-age 0 :path "/"}}})
 
 (defn debug [request]
   (log/info (str request))

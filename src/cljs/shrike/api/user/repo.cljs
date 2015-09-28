@@ -32,7 +32,7 @@
 (defn remove-followed-repo-from-state
   [repo]
   (swap! app-state assoc-in [:user :followed-repos]
-    (remove #(= (:id repo) (:id %)) (:followed-repos (:user @app-state)))))
+         (remove #(= (:id repo) (:id %)) (:followed-repos (:user @app-state)))))
 
 (defn unfollow-repo
   "Stop following this repository."

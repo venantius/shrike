@@ -41,7 +41,6 @@
   [coll repo]
   (update coll  (:login repo) conj repo))
 
-
 (defcomponent followed-repo-list
   [{:keys [user] :as data} owner]
   (render

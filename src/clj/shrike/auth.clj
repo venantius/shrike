@@ -1,6 +1,8 @@
 (ns shrike.auth
   (:require [clojure.tools.logging :as log]
-            [shrike.model.user :as user]))
+            [shrike.controller.auth :as auth]
+            [shrike.model.user :as user]
+            [titan.http.response :as resp]))
 
 (defn auth-fn
   "The Shrike authentication function."
