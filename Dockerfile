@@ -4,4 +4,4 @@ MAINTAINER David Jarvis <david@ursacorp.io>
 ADD target/shrike.jar /srv/app.jar
 
 WORKDIR /srv
-CMD ["java", "-cp", "/srv/app.jar"]
+CMD ["java", "-jar", "/srv/app.jar"]
