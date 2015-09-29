@@ -45,6 +45,7 @@
             [lein-environ "1.0.0"]]
 
   :main shrike.core
+  :aot [titan.commands.db.migrate]
   :source-paths ["src/clj", "src/cljs"]
   :test-paths ["test/clj"]
   :min-lein-version "2.5.0"
