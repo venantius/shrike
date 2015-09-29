@@ -10,7 +10,7 @@ export EB_ENVIRONMENT_NAME="$CIRCLE_PROJECT_REPONAME-env"
 export EB_RETRIES=10
 export EB_DELAY=10
 
-zip -q -r eb.zip Dockerrun.aws.json
+zip -q -r eb.zip Dockerrun.aws.json .ebextensions/
 aws s3 cp eb.zip $EB_DESTINATION
 
 aws elasticbeanstalk create-application-version \
