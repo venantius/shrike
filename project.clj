@@ -9,7 +9,6 @@
 
                  ;; ClojureScript
                  [cljs-ajax "0.3.14"]
-                 [jayq "2.5.4"]
                  [cljsjs/jquery "1.9.1-0"]
                  [org.omcljs/om "0.9.0"]
                  [prismatic/om-tools "0.3.12"]
@@ -76,8 +75,7 @@
 
               :plugins [[jonase/eastwood "0.1.4"]
                         [lein-figwheel "0.4.0"]
-                        [mvxcvi/whidbey "1.0.0"]
-                        ]
+                        [mvxcvi/whidbey "1.0.0"]]
 
               :eastwood {:exclude-linters [:deprecations]}
 
@@ -94,7 +92,6 @@
                                           :compiler {:output-to     "resources/public/js/app_test.js"
                                                      :output-dir    "resources/public/js/test"
                                                      :source-map    "resources/public/js/test.js.map"
-                                                     :preamble      ["react/react.min.js"]
                                                      :optimizations :whitespace
                                                      :pretty-print  false}}}}}
 
@@ -120,6 +117,8 @@
                                             {:jar true
                                              :compiler
                                              {:optimizations :advanced
+                                              :main "shrike.core"
+                                              :asset-path "/js/out"
                                               :pretty-print false}}}}}}
   :uberjar-name "shrike.jar"
   )
