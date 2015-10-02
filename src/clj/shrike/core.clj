@@ -12,9 +12,9 @@
             [shrike.auth :refer [auth-fn]]
             [shrike.controller.auth :refer [csrf-token logout]]
             [shrike.controller.oauth.github :as gh-oauth]
-            [shrike.controller.github.user.repo.build :as build]
             [shrike.controller.github.user.repo :as gh-repo]
             [shrike.controller.user.repo :as repo]
+            [shrike.controller.user.repo.build :as build]
             [titan.middleware.auth :as auth]
             [titan.server :as server]))
 
@@ -54,6 +54,7 @@
      (= path "/about")
      (= path "/pricing")
 
+     (= path "/login")
      (= path "/logout")
      (= path "/oauth/github/login")
      (= path "/oauth/github/callback")
@@ -81,6 +82,9 @@
   site-routes
 
   (GET    "/debug" [] (wrap-json-response debug))
+  (GET    "/login" [] {:status 200
+                       :session {:id 2}
+                       :cookies {"id" {:value 2 :path "/"}}})
 
   ;; not whitelisted
   (GET    "/secure-debug" [] (wrap-json-response debug))

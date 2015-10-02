@@ -8,6 +8,7 @@
             [titan.http.response :as resp]))
 
 ;; TODO: AUTH
+;; TODO: Should mirror create! call
 (defn list
   "List the repositories the user is following."
   [{:keys [params user] :as request}]

@@ -1,8 +1,10 @@
 /target
 /classes
 /checkouts
+figwheel_server.log
 resources/public/js/out/**
 resources/public/js/out*
+resources/public/js/test*
 node_modules
 pom.xml
 pom.xml.asc

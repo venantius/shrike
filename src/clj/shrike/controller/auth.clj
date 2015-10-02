@@ -1,6 +1,7 @@
 (ns shrike.controller.auth)
 
 (defn csrf-token
+  "If this user is logged in, retrieve their CSRF token."
   [{:keys [session user] :as request}]
   (when user
     {:status 200
@@ -8,7 +9,8 @@
      :body (:ring.middleware.anti-forgery/anti-forgery-token session)}))
 
 (defn logout
-  [req]
+  "Empty the session and all other cookies."
+  [request]
   {:body ""
    :headers {"Content-Type" "text/html; charset: utf-8"}
    :status 200
