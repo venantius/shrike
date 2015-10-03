@@ -23,7 +23,7 @@
   (let [url (assoc
              github-login-url
              :query {:client_id client-id
-                     :redirect-uri "http://localhost:8080/oauth/github"
+                     :redirect-uri "http://localhost:5000/oauth/github/callback"
                      :scope "user,repo,read:org"
                      :state state})]
     (assoc-in
