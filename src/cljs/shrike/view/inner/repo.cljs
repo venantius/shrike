@@ -1,4 +1,4 @@
-(ns shrike.view.repo
+(ns shrike.view.inner.repo
   "The repository listing page."
   (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]

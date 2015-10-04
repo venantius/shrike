@@ -1,5 +1,5 @@
-(ns shrike.view.landing.outer
-  "Root landing page"
+(ns shrike.view.outer.landing
+  "Root landing page for non-logged in users."
   (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]))

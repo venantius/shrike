@@ -1,4 +1,4 @@
-(ns shrike.view.owner.repo
+(ns shrike.view.inner.owner.repo
   "High level template for the Shrike dashboard view."
   (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]

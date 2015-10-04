@@ -38,20 +38,23 @@
       (spa))))
 
 (defroutes api-routes
-  (GET    "/api/:username/:repo/build/:build_id" [] build/get)
-  (GET    "/api/:username/:repo/build"           [] build/list)
+  (context "/api/:username/:repo/build" []
+    (GET    "/:build_id"  [] build/get)
+    (GET    "/"           [] build/list))
 
-  (GET    "/api/github/user/repo"                [] gh-repo/list)
-  (GET    "/api/user/repo"                       [] repo/list)
-  (POST   "/api/user/repo"                       [] repo/create!)
-  (DELETE "/api/user/repo/:id"                   [] repo/delete!))
+  (context "/api/user/repo" []
+    (GET    "/"    [] repo/list)
+    (POST   "/"    [] repo/create!)
+    (DELETE "/:id" [] repo/delete!))
+
+  (GET    "/api/github/user/repo"                [] gh-repo/list))
 
 (defroutes app-routes
   (wrap-defaults
-    (wrap-json-body
-      (wrap-json-response api-routes)
-      {:keywords? true})
-    api-defaults)
+   (wrap-json-body
+    (wrap-json-response api-routes)
+    {:keywords? true})
+   api-defaults)
   site-routes
 
   (GET    "/debug" [] (wrap-json-response debug))

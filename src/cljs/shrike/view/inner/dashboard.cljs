@@ -1,12 +1,12 @@
-(ns shrike.view.dashboard
+(ns shrike.view.inner.dashboard
   "Dashboard - the main view for logged-in users."
   (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]
             [shrike.nav :as nav]
             [shrike.state :refer [app-state]]
-            [shrike.view.owner.repo :as owner-repo]
-            [shrike.view.repo :as repo]))
+            [shrike.view.inner.owner.repo :as owner-repo]
+            [shrike.view.inner.repo :as repo]))
 
 (defcomponent repo
   [{:keys [owner name] :as data} owner]

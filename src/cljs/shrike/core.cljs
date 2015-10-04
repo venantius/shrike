@@ -7,12 +7,12 @@
             [shrike.init :as init]
             [shrike.routes]
             [shrike.state :refer [app-state]]
-            [shrike.view.dashboard :as dashboard]
-            [shrike.view.landing.outer :as landing]
-            [shrike.view.owner.repo :as repo-view]
-            [shrike.view.owner.repo.build :as build-view]
-            [shrike.view.repo :as repo]
-            [shrike.view.user.repo.add :as add-repo-view]))
+            [shrike.view.inner.dashboard :as dashboard]
+            [shrike.view.outer.landing :as landing]
+            [shrike.view.inner.owner.repo :as repo-view]
+            [shrike.view.inner.owner.repo.build :as build-view]
+            [shrike.view.inner.repo :as repo]
+            [shrike.view.inner.user.repo.add :as add-repo-view]))
 
 (.log js/console "Successfully loaded shrike Frontend")
 

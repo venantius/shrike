@@ -14,14 +14,15 @@
    (s/optional-key :finished_at) s/Inst
    (s/optional-key :status) s/Str
    (s/optional-key :lines_of_code) s/Int
-   (s/optional-key :definitions) s/Int})
+   (s/optional-key :definitions) s/Int
+   (s/optional-key :coverage) s/Num})
 
 (defn fetch-one-by-username-and-repo
   [user repo build_id]
   (first
    (k/select
     db/build
-    (k/fields [:repo_build_id :build_id] :started_at :status)
+    (k/fields [:repo_build_id :build_id] :started_at :status :coverage)
     (k/where {:repo_build_id build_id})
     (k/with
      db/github-repo
@@ -40,7 +41,7 @@
   (k/select
    db/build
    (k/order :build_id :DESC)
-   (k/fields [:repo_build_id :build_id] :started_at :status)
+   (k/fields [:repo_build_id :build_id] :started_at :status :coverage)
    (k/with
     db/github-repo
     (k/fields [:name])

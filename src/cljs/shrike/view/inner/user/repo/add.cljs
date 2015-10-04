@@ -1,4 +1,4 @@
-(ns shrike.view.user.repo.add
+(ns shrike.view.inner.user.repo.add
   (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]

@@ -25,13 +25,14 @@
 
 (defroute repo-dashboard "/gh/:username/:repo"
   {:keys [repo username] :as params}
-  (build/get-build username repo)
+  (build/get-builds username repo)
   (swap! app-state assoc :repo {:org username :name repo})
   (swap! app-state assoc :view "dashboard"))
 
 (defroute build-summary "/gh/:username/:repo/:build_id"
-  {:keys [repo username] :as params}
-  (build/get-build username repo)
+  {:keys [repo username build_id] :as params}
+  (build/get-build username repo build_id)
+  (swap! app-state assoc :repo {:org username :name repo})
   (swap! app-state assoc :view "build-summary"))
 
 (secretary/dispatch! (.-pathname (.-location js/window)))
