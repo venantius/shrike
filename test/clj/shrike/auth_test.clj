@@ -16,4 +16,3 @@
     (is (= (auth/auth-fn {})
            nil))))
 
-

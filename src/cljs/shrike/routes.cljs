@@ -26,14 +26,26 @@
 (defroute repo-dashboard "/gh/:username/:repo"
   {:keys [repo username] :as params}
   (build/get-builds username repo)
-  (swap! app-state assoc :repo {:org username :name repo})
+  (swap! app-state assoc :repo {:owner username :name repo})
   (swap! app-state assoc :view "dashboard"))
 
-(defroute build-summary "/gh/:username/:repo/:build_id"
+(defroute build-summary "/gh/:username/:repo/build/:build_id"
   {:keys [repo username build_id] :as params}
   (build/get-build username repo build_id)
-  (swap! app-state assoc :repo {:org username :name repo})
+  (swap! app-state assoc :repo {:owner username :name repo})
   (swap! app-state assoc :view "build-summary"))
+
+(defroute build-coverage "/gh/:username/:repo/build/:build_id/coverage"
+  {:keys [repo username build_id] :as params}
+  (build/get-build username repo build_id)
+  (swap! app-state assoc :repo {:owner username :name repo})
+  (swap! app-state assoc :view "build-coverage"))
+
+(defroute build-style "/gh/:username/:repo/build/:build_id/style"
+  {:keys [repo username build_id] :as params}
+  (build/get-build username repo build_id)
+  (swap! app-state assoc :repo {:owner username :name repo})
+  (swap! app-state assoc :view "build-style"))
 
 (secretary/dispatch! (.-pathname (.-location js/window)))
 

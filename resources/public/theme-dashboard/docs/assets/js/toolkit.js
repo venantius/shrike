@@ -4150,7 +4150,7 @@ $(function () {
 
       var options = $.extend({
         responsive: true,
-        animation: false,
+        animation: true,
         segmentStrokeColor: '#fff',
         segmentStrokeWidth: 2,
         percentageInnerCutout: 80,

@@ -31,7 +31,10 @@
       "dashboard"       (om/build dashboard/dashboard data)
       "add-repo"        (om/build add-repo-view/add-repo-view data)
       "repo-list"       (om/build repo/followed-repo-list data)
-      "build-summary"   (om/build build-view/build-summary data)
+
+      "build-summary"   (om/build build-view/build data)
+      "build-coverage"  (om/build build-view/build data)
+      "build-style"     (om/build build-view/build data)
       (dom/h1 "nomatch"))))
   ;; Need these for the Chart.js charts. Former in dev, latter in prod.
   (did-mount

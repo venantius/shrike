@@ -7,13 +7,13 @@
 (defcomponent outer
   [data owner]
   (render
-    [_]
+   [_]
+   (dom/div
+    {:class "container-fluid container-fluid-spacious"}
     (dom/div
-      {:class "container-fluid container-fluid-spacious"}
-      (dom/div
-        {:class "dashhead m-t-md"}
-        (dom/h6
-          {:class "dashhead-subtitle"}
-          "Shrike")
-        (dom/h2
-          "Other")))))
+     {:class "dashhead m-t-md"}
+     (dom/h6
+      {:class "dashhead-subtitle"}
+      "Shrike")
+     (dom/h2
+      "Other")))))

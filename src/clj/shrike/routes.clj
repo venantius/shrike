@@ -33,7 +33,9 @@
             "/user/repos/add"
 
             "/gh/:username/:repo"
-            "/gh/:username/:repo/:build_id"]
+            "/gh/:username/:repo/build/:build_id"
+            "/gh/:username/:repo/build/:build_id/coverage"
+            "/gh/:username/:repo/build/:build_id/style"]
            request)
       (spa))))
 

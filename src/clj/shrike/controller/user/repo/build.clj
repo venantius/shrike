@@ -12,7 +12,7 @@
     (cond
       (not (and username repo build_id))
       (response/bad-request
-        "Request must include 'username', 'repo', and 'build_id'")
+       "Request must include 'username', 'repo', and 'build_id'")
       :else
       (if-let [build (build/fetch-one-by-username-and-repo username repo build_id)]
         (response/ok build)

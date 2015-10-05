@@ -5,12 +5,6 @@
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]))
 
-(defn get-history
-  [data]
-  (GET "/api/ursacorp/test-repo/build"
-    {:handler #(.log js/console "Yay!" (str %))
-     :error-handler #(.log js/console "Boo!")}))
-
 (defcomponent build-row
   [{:keys [build_id name owner sha started_at status] :as build} owner]
   (render
@@ -19,7 +13,7 @@
     (dom/td
      {:class "col-md-2"}
      (dom/a
-      {:href (str "/gh/" owner "/" name "/" build_id)}
+      {:href (str "/gh/" owner "/" name "/build/" build_id)}
       (str "#" build_id)))
     (dom/td
      {:class "col-md-2"}

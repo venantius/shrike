@@ -22,7 +22,7 @@
   (first
    (k/select
     db/build
-    (k/fields [:repo_build_id :build_id] :started_at :status :coverage)
+    (k/fields [:repo_build_id :build_id] :started_at :status :coverage :lines_of_code)
     (k/where {:repo_build_id build_id})
     (k/with
      db/github-repo
@@ -41,7 +41,7 @@
   (k/select
    db/build
    (k/order :build_id :DESC)
-   (k/fields [:repo_build_id :build_id] :started_at :status :coverage)
+   (k/fields [:repo_build_id :build_id] :started_at :status :coverage :lines_of_code)
    (k/with
     db/github-repo
     (k/fields [:name])

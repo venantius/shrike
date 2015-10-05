@@ -16,9 +16,9 @@
   "List the repositories the user has access to on GitHub."
   [{:keys [params user] :as request}]
   (let [followed-repo-ids (into #{}
-                             (map :github_repo_id
-                                  (followed-repo/fetch-followed-repo
-                                   {:user_id (:id user)})))]
+                                (map :github_repo_id
+                                     (followed-repo/fetch-followed-repo
+                                      {:user_id (:id user)})))]
     {:status 200
      :body (map
             (partial flag-followed-repos followed-repo-ids)
