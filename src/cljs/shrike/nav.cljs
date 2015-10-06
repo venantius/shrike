@@ -11,14 +11,14 @@
 (defn go-to-build-summary-page!
   [username repo build_id]
   (accountant/navigate!
-    (string/format "/gh/%s/%s/build/%s" username repo build_id)))
+   (string/format "/gh/%s/%s/build/%s" username repo build_id)))
 
 (defn go-to-build-coverage-page!
   [username repo build_id]
   (accountant/navigate!
-    (string/format "/gh/%s/%s/build/%s/coverage" username repo build_id)))
+   (string/format "/gh/%s/%s/build/%s/coverage" username repo build_id)))
 
 (defn go-to-build-style-page!
   [username repo build_id]
   (accountant/navigate!
-    (string/format "/gh/%s/%s/build/%s/style" username repo build_id)))
+   (string/format "/gh/%s/%s/build/%s/style" username repo build_id)))

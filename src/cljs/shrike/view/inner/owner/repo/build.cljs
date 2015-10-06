@@ -1,11 +1,12 @@
 (ns shrike.view.inner.owner.repo.build
   "/gh/:owner/:repo/build/:build_id"
-  (:require [goog.string :refer [format]]
-            [om.core :as om]
+  (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]
             [shrike.component.statcard :as statcard]
-            [shrike.nav :as nav]))
+            [shrike.nav :as nav]
+            [shrike.view.inner.owner.repo.build.coverage :as coverage]
+            [shrike.view.inner.owner.repo.build.style :as style]))
 
 (defcomponent build-details
   [{:keys [repo]} owner]
@@ -27,55 +28,60 @@
        (statcard/build-details-statcard "Duration" "5m 20s")
        (statcard/build-details-statcard "Status" "Running"))))))
 
+(defcomponent build-summary
+  [data owner]
+  (render
+   [_]
+   (dom/div
+    {:class "row statcards"}
+    (om/build statcard/statcard-details data)
+    (om/build statcard/statcard-details-2 data)
+    (om/build statcard/statcard-coverage data)
+    (om/build statcard/statcard-deadcode data))))
+
+(def menu-tab
+  {:role "button"
+   :data-toggle "tab"
+   :aria-controls "support"
+   :aria-expanded false})
+
 (defcomponent build-statcards
   [{:keys [repo view] :as data} owner]
   (render
    [_]
-    (let [{:keys [build_id owner name]} (:current-build repo)]
-   (dom/div
-    (om/build build-details data)
-    (dom/ul
-     {:class "nav nav-bordered m-t m-b-0"
-      :role "tablist"}
-     (dom/li
-       {:class (when (= view "build-summary") "active")
-        :role "presentation"}
-      (dom/a
-       {:on-click #(nav/go-to-build-summary-page! owner name build_id)
-        :role "button"
-        :data-toggle "tab"
-        :aria-controls "support"
-        :aria-expanded false}
-       "Build Summary"))
-     (dom/li
-       {:class (when (= view "build-coverage") "active")
-        :role "presentation"}
-      (dom/a
-       {:on-click #(nav/go-to-build-coverage-page! owner name build_id)
-        :role "button"
-        :data-toggle "tab"
-        :aria-controls "support"
-        :aria-expanded false}
-       "Code Coverage"))
-     (dom/li
-       {:class (when (= view "build-style") "active")
-        :role "presentation"}
-      (dom/a
-       {:on-click #(nav/go-to-build-style-page! owner name build_id)
-        :role "button"
-        :data-toggle "tab"
-        :aria-controls "support"
-        :aria-expanded false}
-       "Style")))
-    (dom/hr
-     {:class "m-t-0"})
-    (dom/div
+   (let [{:keys [build_id coverage owner name]} (:current-build repo)]
      (dom/div
-      {:class "row statcards"}
-      (om/build statcard/statcard-details data)
-      (om/build statcard/statcard-details-2 data)
-      (om/build statcard/statcard-coverage data)
-      (om/build statcard/statcard-deadcode data)))))))
+      (om/build build-details data)
+      (dom/ul
+       {:class "nav nav-bordered m-t m-b-0"
+        :role "tablist"}
+       (dom/li
+        {:class (when (= view "build-summary") "active")
+         :role "presentation"}
+        (dom/a
+         (merge menu-tab
+                {:on-click #(nav/go-to-build-summary-page! owner name build_id)})
+         "Build Summary"))
+       (when coverage
+         (dom/li
+          {:class (when (= view "build-coverage") "active")
+           :role "presentation"}
+          (dom/a
+           (merge menu-tab
+                  {:on-click #(nav/go-to-build-coverage-page! owner name build_id)})
+           "Code Coverage")))
+       (dom/li
+        {:class (when (= view "build-style") "active")
+         :role "presentation"}
+        (dom/a
+         (merge menu-tab {:on-click #(nav/go-to-build-style-page! owner name build_id)})
+         "Style")))
+      (dom/hr
+       {:class "m-t-0"})
+       (condp = view
+         "build-summary"  (om/build build-summary data)
+         "build-coverage" (om/build coverage/build-coverage data)
+         "build-style"    (om/build style/build-style data))))))
 
 (defcomponent build
   [{:keys [repo] :as data} owner]
@@ -83,6 +89,11 @@
    [_]
    (dom/div
     {:class "container-fluid container-fluid-spacious"}
+     (dom/div
+       {:class "row"}
+       (dom/div
+         {:class "col-xs-6"}
+
     (dom/div
      {:class "dashhead m-t-md"}
      (dom/div
@@ -92,5 +103,19 @@
        "Shrike")
       (dom/h2
        {:class "dashhead-title"}
-       (str (:owner repo) "/" (:name repo)))))
+       (str (:owner repo) "/" (:name repo) " ")))))
+       (dom/div
+         {:class "col-xs-6"}
+         (dom/div
+           {:class "dashhead m-t-md"}
+           (dom/div
+             {:class "dashhead-titles m-t"
+              :style {:float "right"}}
+             (dom/h2
+               {:class "dashhead-title"
+                :style {:color "#1997c6"}}
+               "settings "
+               (dom/span
+                 {:class "icon icon-cog"
+                  :style {:font-size "22"}}))))))
     (om/build build-statcards data))))

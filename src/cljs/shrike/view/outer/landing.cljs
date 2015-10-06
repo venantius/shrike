@@ -16,4 +16,4 @@
       {:class "dashhead-subtitle"}
       "Shrike")
      (dom/h2
-      "Other")))))
+      "Impale Bad Code")))))
