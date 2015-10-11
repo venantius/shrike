@@ -1,5 +1,6 @@
 #!/bin/bash -ex
 
+rm -rf resources/public/js/out
 lein uberjar
 
 export NOW=$(date +%s)

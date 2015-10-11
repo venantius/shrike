@@ -3,5 +3,6 @@
             [shrike.model.github.access-token :as access-token]
             [titan.test.fixtures :refer [with-db-fixtures]]))
 
-(deftest create-or-update-github-access-token-works
+;; TODO
+#_(deftest create-or-update-github-access-token-works
   (is (= 0 1)))

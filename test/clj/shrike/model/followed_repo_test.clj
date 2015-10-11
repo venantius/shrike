@@ -3,5 +3,6 @@
             [shrike.model.followed-repo :as followed-repo]
             [titan.test.fixtures :refer [with-db-fixtures]]))
 
-(deftest fetch-with-full-repo-info-works
+;; TODO
+#_(deftest fetch-with-full-repo-info-works
   (is (= 0 1)))

@@ -3,8 +3,9 @@
             [shrike.model.user :as user]
             [titan.test.fixtures :refer [with-db-fixtures]]))
 
-(deftest create-or-update-from-access-token!-works
+;; TODO
+#_(deftest create-or-update-from-access-token!-works
   (is (= 0 1)))
 
-(deftest fetch-one-user-with-access-token-works
+#_(deftest fetch-one-user-with-access-token-works
   (is (= 0 1)))
