@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 rm -rf resources/public/js/shrike
-lein uberjar
+JVM_OPTS="-Xmx2048m -server" lein uberjar
 
 export NOW=$(date +%s)
 export DOCKER_TAG=quay.io/venantius/${CIRCLE_PROJECT_REPONAME}:$NOW-${CIRCLE_SHA1:0:8}

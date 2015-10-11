@@ -69,7 +69,9 @@
                     :database-url "postgres://localhost:5432/shrike"
                     :reload-db-on-run true
                     :port "8080"
-                    :session-key "california--bear"}
+                    :session-key "california--bear"
+                    :gh-client-id "0444be153780e496dbf5"
+                    :gh-client-secret "b7e407141e8b9e152f297e01d37449e9c4d77b3c"}
 
               :repl-options {:port 7002}
 
