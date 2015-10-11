@@ -51,13 +51,13 @@
   :min-lein-version "2.5.0"
 
   :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
-                             :compiler {:output-to     "resources/public/js/app.js"
-                                        :output-dir    "resources/public/js/out"
-                                        :source-map    "resources/public/js/out.js.map"
+                             :compiler {:output-to     "resources/public/js/shrike/app.js"
+                                        :output-dir    "resources/public/js/shrike/out"
+                                        :source-map    "resources/public/js/shrike/out.js.map"
                                         :preamble      ["react/react.min.js"]
                                         :optimizations :none
                                         :main "shrike.core"
-                                        :asset-path "/js/out"
+                                        :asset-path "/js/shrike/out"
                                         :pretty-print  true}}}}
 
   :test-selectors {:default (complement :integration)
@@ -89,9 +89,9 @@
                                            "env/test/unit-test.html"]}
                           :builds {:app {:figwheel true}
                                    :test {:source-paths ["src/cljs" "test/cljs"]
-                                          :compiler {:output-to     "resources/public/js/app_test.js"
-                                                     :output-dir    "resources/public/js/test"
-                                                     :source-map    "resources/public/js/test.js.map"
+                                          :compiler {:output-to     "resources/public/js/shrike/app_test.js"
+                                                     :output-dir    "resources/public/js/shrike/test"
+                                                     :source-map    "resources/public/js/shrike/test.js.map"
                                                      :optimizations :whitespace
                                                      :pretty-print  false}}}}}
 
@@ -112,13 +112,13 @@
                        :env {:production true}
                        :omit-source true
                        :aot :all
-                       :prep-tasks ["compile" ["cljsbuild" "once"]]
+                       :prep-tasks [["cljsbuild" "once"] "compile"]
                        :cljsbuild {:builds {:app
                                             {:jar true
                                              :compiler
                                              {:optimizations :advanced
                                               :main "shrike.core"
-                                              :asset-path "/js/out"
+                                              :asset-path "/js/shrike/out"
                                               :pretty-print false}}}}}}
   :uberjar-name "shrike.jar"
   )
