@@ -1,10 +1,7 @@
 (ns shrike.core
   (:gen-class)
   (:require [clojure.tools.logging :as log]
-            [environ.core :as env]
-            [ring.middleware.defaults :refer :all]
             [ring.middleware.reload :refer [wrap-reload]]
-            [ring.middleware.session.cookie :refer [cookie-store]]
             [shrike.auth :refer [auth-fn]]
             [shrike.routes :as routes]
             [titan.middleware.auth :as auth]
@@ -37,15 +34,10 @@
 
 (def app
   (wrap-reload
-   (wrap-defaults
     (auth/wrap-authentication
-     #'routes/app-routes
-     auth-fn
-     :whitelist route-whitelist-fn)
-    (assoc
-     site-defaults
-     :session
-     {:store (cookie-store {:key (env/env :session-key)})}))))
+      #'routes/app-routes
+      auth-fn
+      :whitelist route-whitelist-fn)))
 
 (defn -main
   []

@@ -2,9 +2,12 @@
   (:require [clojure.tools.logging :as log]
             [compojure.core :refer :all]
             [compojure.route :as route]
+            [environ.core :as env]
             [ring.middleware.defaults :refer [api-defaults
+                                              site-defaults
                                               wrap-defaults]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
+            [ring.middleware.session.cookie :refer [cookie-store]]
             [ring.util.response :as response]
             [shrike.controller.auth :refer [csrf-token logout]]
             [shrike.controller.github.user.repo :as gh-repo]
@@ -57,9 +60,11 @@
     (wrap-json-response api-routes)
     {:keywords? true})
    api-defaults)
-  site-routes
+
+  ;; various routes that don't require CSRF
 
   (GET    "/debug" [] (wrap-json-response debug))
+  (POST   "/debug" [] (wrap-json-response debug))
   (GET    "/login" [] {:status 200
                        :session {:id 2}
                        :cookies {"id" {:value 2 :path "/"}}})
@@ -72,6 +77,15 @@
   (GET    "/logout" [] logout)
   (GET    "/oauth/github/login" [] gh-oauth/redirect)
   (GET    "/oauth/github/callback" [] gh-oauth/callback)
+
+  ;; after this goes CSRF stuff and other site controlled things
+
+  (wrap-defaults
+    site-routes
+    (assoc
+      site-defaults
+      :session
+      {:store (cookie-store {:key (env/env :session-key)})}))
 
   (route/resources "/")
   (route/not-found "Whoops! Y'all found some shit that don't exist!"))

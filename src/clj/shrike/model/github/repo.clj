@@ -14,8 +14,9 @@
 
 (defn fetch-one-with-owner
   [repo]
-  (k/select
+  (first
+   (k/select
     db/github-repo
     (k/with
-      db/github-user
-      (k/fields :login [:type :owner_type]))))
+     db/github-user
+     (k/fields :login [:type :owner_type])))))

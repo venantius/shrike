@@ -26,6 +26,6 @@
     name
     "web"
     {:url "http://shrike-env.elasticbeanstalk.com/debug"
-     :content-type :json
+     :content_type :json
      :secret "alfalfa"}
     (auth-map user)))
