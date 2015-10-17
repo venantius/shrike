@@ -1,6 +1,13 @@
 (ns shrike.core
   (:gen-class)
   (:require [clojure.tools.logging :as log]
+            [compojure.core :refer :all]
+            [compojure.route :as route]
+            [environ.core :as env]
+            [ring.middleware.defaults :refer [api-defaults
+                                              site-defaults
+                                              wrap-defaults]]
+            [ring.middleware.session.cookie :refer [cookie-store]]
             [ring.middleware.reload :refer [wrap-reload]]
             [shrike.auth :refer [auth-fn]]
             [shrike.routes :as routes]
@@ -19,6 +26,8 @@
      (.startsWith path "/fonts")
      (.startsWith path "/images")
      (.startsWith path "/js")
+      ;; TODO: Move this later
+     (.startsWith path "/theme-dashboard")
 
      (= path "/about")
      (= path "/pricing")
@@ -32,13 +41,22 @@
     true
     :else false))
 
+(def shrike-app
+  (-> #'routes/app-routes
+      (auth/wrap-authentication
+       auth-fn
+       :whitelist route-whitelist-fn)
+      (wrap-defaults
+       (assoc site-defaults
+              :session
+              {:store (cookie-store {:key (env/env :session-key)})}))
+      (wrap-reload)))
+
 (def app
-  (wrap-reload
-    (auth/wrap-authentication
-      #'routes/app-routes
-      auth-fn
-      :whitelist route-whitelist-fn)))
+  (routes
+    routes/webhook-routes
+    shrike-app))
 
 (defn -main
   []
-  (server/run-server #'app nil))
+  (server/run-server #'app {:host (env/env :host)}))

@@ -16,18 +16,21 @@
                  [venantius/accountant "0.1.2"]
 
                  ;; This section is for shrike
+                 [amazonica "0.3.34"]
                  [tentacles "0.3.0"]
 
                  ;; Everything below here is needed for Titan
                  [org.clojure/tools.logging "0.3.1"]
                  [org.clojure/tools.nrepl "0.2.10"]
                  [org.slf4j/slf4j-log4j12 "1.7.12"]
+                 [org.immutant/immutant "2.1.0"
+                  :exclusions [[ch.qos.logback/logback-classic]
+                               [ch.qos.logback/logback-core]]
+                  ]
                  [korma "0.4.2"]
                  [ragtime "0.5.2"]
                  [ring "1.4.0"]
-                 [aleph "0.4.0"] ;; let's try Aleph
                  [ring/ring-defaults "0.1.5"]
-                 [ring/ring-jetty-adapter "1.4.0"]
                  [ring/ring-json "0.4.0"]
                  [compojure "1.4.0"]
                  [prismatic/schema "1.0.1"]
@@ -111,7 +114,8 @@
              {:env {:environment "production"}}
 
              :uberjar {:hooks [leiningen.cljsbuild]
-                       :env {:production true}
+                       :env {:production true
+                             :host "0.0.0.0"}
                        :omit-source true
                        :aot :all
                        :prep-tasks [["cljsbuild" "once"] "compile"]
