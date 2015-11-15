@@ -12,11 +12,11 @@
   "Create an SQS queue."
   [queue-name]
   (sqs/create-queue
-    credentials
-    :queue-name queue-name
-    :attributes
-    {:ReceiveMessageWaitTimeSeconds 10
-     :VisibilityTimeout 30}))
+   credentials
+   :queue-name queue-name
+   :attributes
+   {:ReceiveMessageWaitTimeSeconds 10
+    :VisibilityTimeout 30}))
 
 (defn list-queues
   "List all of the available SQS queues."
@@ -27,26 +27,20 @@
   "Delete a SQS queue."
   [url]
   (sqs/delete-queue
-    credentials
-    url))
+   credentials
+   url))
 
 (defn send-message
   "Enqueue a message."
   [queue-name content]
   (sqs/send-message
-    credentials
-    queue-name
-    content))
+   credentials
+   queue-name
+   content))
 
 (defn receive-message
   [queue-name]
   (sqs/receive-message
-    credentials
-    queue-name
-    :wait-time-seconds 6
-    ))
-
-(defn delete-message
-  []
-  )
-
+   credentials
+   queue-name
+   :wait-time-seconds 6))

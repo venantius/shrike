@@ -5,9 +5,6 @@
 
 (with-db-fixtures)
 
-(deftest a-b
-  (is (= {:a 2} {:b 3})))
-
 (deftest authn-fn-works
   (let [req {:session {:id 1}}]
     (is (= (auth/auth-fn req)

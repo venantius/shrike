@@ -1,12 +1,8 @@
 (ns titan.app
   (:require [compojure.core :as compojure]))
 
-(def app (atom {}))
-
-(defn- intern-app
-  [args]
-  (reset! app args))
+(defonce app (atom {}))
 
 (defmacro defapp
   [& body]
-  `(#'intern-app (compojure/routes ~@body)))
+  `(reset! app (compojure/routes ~@body)))

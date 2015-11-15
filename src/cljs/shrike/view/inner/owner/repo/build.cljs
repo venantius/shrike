@@ -1,7 +1,6 @@
 (ns shrike.view.inner.owner.repo.build
   "/gh/:owner/:repo/build/:build_id"
-  (:require [goog.string :as string]
-            [om.core :as om]
+  (:require [om.core :as om]
             [om-tools.core :refer-macros [defcomponent]]
             [om-tools.dom :as dom]
             [shrike.component.statcard :as statcard]
