@@ -16,8 +16,8 @@
    :body (presenter/list user)})
 
 (defn create!
-  [{:keys [body user] :as request}]
-  (let [{:keys [id full_name name owner private fork]} body]
+  [{:keys [params user] :as request}]
+  (let [{:keys [id full_name name owner private fork]} params]
     (when-not (user/fetch-one-github-user {:id (:id owner)})
       (user/create-github-user! {:id (:id owner)
                                  :login (:login owner)

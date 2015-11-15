@@ -47,6 +47,6 @@
   (build/get-build username repo build_id)
   (swap! app-state assoc :view "build-style"))
 
-(secretary/dispatch! (.-pathname (.-location js/window)))
-
 (accountant/configure-navigation!)
+
+(accountant/dispatch-current!)

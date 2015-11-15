@@ -11,6 +11,7 @@
             [ring.middleware.reload :refer [wrap-reload]]
             [shrike.auth :refer [auth-fn]]
             [shrike.routes :as routes]
+            [titan.app :as app]
             [titan.middleware.auth :as auth]
             [titan.server :as server]))
 
@@ -52,11 +53,11 @@
               {:store (cookie-store {:key (env/env :session-key)})}))
       (wrap-reload)))
 
-(def app
+(app/defapp
   (routes
-    routes/webhook-routes
-    shrike-app))
+   routes/webhook-routes
+   shrike-app))
 
 (defn -main
   []
-  (server/run-server #'app {:host (env/env :host)}))
+  (server/start-server))

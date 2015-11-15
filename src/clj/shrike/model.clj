@@ -33,3 +33,7 @@
   (table :shrike.followed_repo)
   (belongs-to user)
   (belongs-to github-repo {:fk :github_repo_id}))
+
+(defentity plan
+  (table :shrike.plan :plan)
+  (belongs-to user {:fk :user_id}))

@@ -3,13 +3,16 @@
             [compojure.core :refer :all]
             [compojure.route :as route]
             [environ.core :as env]
-            [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
+            [ring.middleware.keyword-params :refer [wrap-keyword-params]]
+            [ring.middleware.json :refer [wrap-json-params
+                                          wrap-json-response]]
             [ring.util.response :as response]
             [shrike.controller.auth :refer [csrf-token logout]]
             [shrike.controller.github.user.repo :as gh-repo]
             [shrike.controller.oauth.github :as gh-oauth]
             [shrike.controller.user.repo :as repo]
             [shrike.controller.user.repo.build :as build]
+            [shrike.controller.webhooks.github :as gh-webhooks]
             [titan.middleware.auth :as auth]))
 
 (defn debug [request]
@@ -54,9 +57,9 @@
   (GET    "/api/github/user/repo"                [] gh-repo/list))
 
 (defroutes app-routes
-  (wrap-json-body
-    (wrap-json-response api-routes)
-    {:keywords? true})
+  (wrap-json-params
+   (wrap-keyword-params
+    (wrap-json-response api-routes)))
 
   (GET    "/debug" [] (wrap-json-response debug))
 
@@ -72,4 +75,7 @@
 
 ;; Not protected by CSRF
 (defroutes webhook-routes
-  (POST "/webhooks/github" [] (wrap-json-response debug)))
+  (POST "/webhooks/github" [] (wrap-json-params
+                               (wrap-keyword-params
+                                (wrap-json-response
+                                 gh-webhooks/listen)))))

@@ -1,13 +1,29 @@
 (ns titan.controller
-  (:require [schema.macros :as schema-macros]))
+  (:require [schema.core :as s]))
+
+(defn coerce
+  [req opt]
+  (println opt)
+  req)
+
+(defn wrap-type-coersion
+  [f opts]
+  (fn [req]
+    (let [req (reduce coerce req opts)]
+      (f req))))
+
+(def controller-keys
+  [:body
+   :form-params
+   :params
+   :route-params
+   :query-params])
 
 (defmacro controller
-  [args body {:keys [query-params
-                     path-params
-                     body-params] :as opts}]
-  (println opts)
-  `(let [f# (fn ~args ~@body)]
-     f#))
+  [args body opts]
+  `(let [f# (fn ~args ~@body)
+         opts# (select-keys ~opts controller-keys)]
+     (wrap-type-coersion f# opts#)))
 
 (defn- take-if
   [func form]

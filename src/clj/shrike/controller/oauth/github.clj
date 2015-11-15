@@ -25,7 +25,6 @@
    the params, and then makes a call to
    https://github.com/login/oauth/access_token to generate an OAuth token."
   [{:keys [params] :as request}]
-  (log/info request)
   (let [{:keys [code state]} params
         at (oauth/access-token-exchange code)]
     (if (nil? (oauth-state/fetch-one-github-oauth-state {:state state}))

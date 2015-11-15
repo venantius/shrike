@@ -18,7 +18,7 @@
       {:class "active"})
     (dom/a
      {:role "button"
-      :on-click #(nav/go-to-repo-dashboard! owner name)}
+      :href (nav/repo-dashboard owner name)}
      name))))
 
 (defcomponent repo-sidebar
