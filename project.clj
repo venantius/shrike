@@ -38,6 +38,7 @@
                  ;; Additional JDBC drivers may be required.
                  [org.postgresql/postgresql "9.4-1202-jdbc4"]
                  [mvxcvi/whidbey "1.1.1"]
+                 [com.taoensso/tower "2.0.2"]
                  ]
 
   :plugins [[lein-cljsbuild "1.1.0"]
@@ -75,6 +76,7 @@
                     :gh-client-secret "b7e407141e8b9e152f297e01d37449e9c4d77b3c"}
 
               :repl-options {:port 7003}
+              :dependencies [[bond "0.2.5"]]
 
               :plugins [[jonase/eastwood "0.1.4"]
                         [lein-figwheel "0.4.1"]

@@ -1,16 +1,35 @@
 (ns titan.controller
-  (:require [schema.core :as s]))
+  (:require [schema.core :as s]
+            [schema.coerce :as coerce]
+            [titan.model :refer [coerce]]
+            [titan.schema :refer [human-readable-error]]))
 
-(defn coerce
-  [req opt]
-  (println opt)
-  req)
+(defn coerce-req
+  [{:keys [status] :as req} field schema]
+  (let [{:keys [error] :as coercion} ((coerce schema) (field req))]
+    (if error
+      (assoc req :error (human-readable-error error))
+      (assoc req field coercion))))
+
+(defn- reduce-coercion
+  [{:keys [error] :as req} opts]
+  (if error
+    {:error error}
+    (let [[field schema] (first opts)]
+      (if field
+        (if (next opts)
+          (reduce-coercion (coerce-req req field schema) (next opts))
+          (coerce-req req field schema))
+        req))))
 
 (defn wrap-type-coersion
   [f opts]
   (fn [req]
-    (let [req (reduce coerce req opts)]
-      (f req))))
+    (let [{:keys [error] :as req} (reduce-coercion req opts)]
+      (if error
+        {:status 400
+         :body error}
+        (f req)))))
 
 (def controller-keys
   [:body
@@ -51,7 +70,8 @@
   (let [[docstring? body] (take-if string? body)
         [metadata body] (take-if map? body)
         [arglist body] [(first body) (next body)]]
-    `(def ~(with-meta name (merge (meta name) (if docstring?
-                                                (assoc metadata :doc docstring?)
-                                                metadata)))
+    `(def ~(with-meta name (merge (meta name)
+                                  (if docstring?
+                                    (assoc metadata :doc docstring?)
+                                    metadata)))
        (controller ~arglist ~body ~metadata))))
