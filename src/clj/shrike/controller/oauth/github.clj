@@ -13,8 +13,7 @@
    authentication page."
   [{:keys [params]}]
   (let [state (oauth-state/create-github-oauth-state!
-               (oauth-state/map->github-oauth-state
-                {:state (token/generate-token)}))]
+               {:state (token/generate-token)})]
     (oauth/github-redirect-url (:state state))))
 
 (defn callback
@@ -30,9 +29,8 @@
     (if (nil? (oauth-state/fetch-one-github-oauth-state {:state state}))
       (resp/unauthorized "Provided state did not match OAuth state.")
       (let [access-token (access-token/create-or-update-github-access-token!
-                          (access-token/map->github-access-token
-                           {:token (:access_token at)
-                            :scope (:scope at)}))
+                          {:token (:access_token at)
+                           :scope (:scope at)})
             {:keys [id] :as user} (user/create-or-update-from-access-token! access-token)]
         (assoc
          (resp/redirect "/")

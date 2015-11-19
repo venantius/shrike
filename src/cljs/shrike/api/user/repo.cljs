@@ -27,6 +27,7 @@
      :headers {:X-CSRF-Token (csrf-token)}
      :params (clj->js repo)
      :keywords? true
+     :error-handler (fn [r] (js/console.log (clj->js r)))
      :handler (fn [r] (js/console.log (clj->js r)) (add-new-followed-repo-to-state r))}))
 
 (defn remove-followed-repo-from-state

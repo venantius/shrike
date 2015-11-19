@@ -1,8 +1,28 @@
 (ns titan.controller
   (:require [schema.core :as s]
             [schema.coerce :as coerce]
-            [titan.model :refer [coerce]]
             [titan.schema :refer [human-readable-error]]))
+
+(defn convert-to-keyword
+  [k]
+  (if (= (type k) schema.core.OptionalKey)
+    (first (vals k))
+    k))
+
+(defn- schema-keys
+  "Grab the keys for this schema. Convert optional keys to ordinary keywords."
+  [schema]
+  (map convert-to-keyword (keys schema)))
+
+(defn coerce
+  [schema]
+  (fn [data]
+    (let [schema-keys (schema-keys schema)
+          data (select-keys data schema-keys)]
+      ((coerce/coercer
+        schema
+        coerce/string-coercion-matcher)
+       data))))
 
 (defn coerce-req
   [{:keys [status] :as req} field schema]

@@ -47,4 +47,4 @@
    (when-not @server
      (log/infof "Starting nREPL server on port %s..." port)
      (spit ".nrepl-port" port)
-     (reset! server (nrepl/start-server :port port :handler handler)))))
+     #_(reset! server (nrepl/start-server :port port :handler handler)))))
