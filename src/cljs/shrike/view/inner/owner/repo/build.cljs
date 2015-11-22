@@ -41,7 +41,6 @@
 
 (def menu-tab
   {:role "button"
-   :data-toggle "tab"
    :aria-controls "support"
    :aria-expanded false})
 
@@ -60,7 +59,7 @@
          :role "presentation"}
         (dom/a
          (merge menu-tab
-                {:on-click #(nav/go-to-build-summary-page! owner name build_id)})
+                {:href (nav/build-summary-page owner name build_id)})
          "Build Summary"))
        (when coverage
          (dom/li
@@ -68,13 +67,14 @@
            :role "presentation"}
           (dom/a
            (merge menu-tab
-                  {:on-click #(nav/go-to-build-coverage-page! owner name build_id)})
+                  {:href (nav/build-coverage-page owner name build_id)})
            "Code Coverage")))
        (dom/li
         {:class (when (= view "build-style") "active")
          :role "presentation"}
         (dom/a
-         (merge menu-tab {:on-click #(nav/go-to-build-style-page! owner name build_id)})
+         (merge menu-tab
+                {:href (nav/build-style-page owner name build_id)})
          "Style")))
       (dom/hr
        {:class "m-t-0"})

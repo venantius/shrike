@@ -15,4 +15,3 @@
             :github_access_token_id 100001}))
     (is (= (auth/auth-fn {})
            nil))))
-

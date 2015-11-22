@@ -17,6 +17,11 @@
            :per-page 100
            :all-pages true})))
 
+(defn test-webhook
+  "Given a repo and a webhook ID, test the webhook."
+  [{:keys [login name] :as repo} id user]
+  (repos/test-hook login name id (auth-map user)))
+
 ;; TODO - finish this
 (defn create-webhook
   "Register a new webhook."

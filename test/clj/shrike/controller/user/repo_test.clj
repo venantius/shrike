@@ -16,14 +16,14 @@
 
 (deftest we-can-follow-a-new-repo
   (let [request {:user {:id 1}
-                 :body {:id 42705074
-                        :full_name "ursacorp/test-repo"
-                        :name "test-repo"
-                        :owner {:id 7268171
-                                :login "ursacorp"
-                                :type "Organization"}
-                        :private false
-                        :fork false}}]
+                 :params {:id 42705074
+                          :full_name "ursacorp/test-repo"
+                          :name "test-repo"
+                          :owner {:id 7268171
+                                  :login "ursacorp"
+                                  :type "Organization"}
+                          :private false
+                          :fork false}}]
     (is (= (repo/create! request)
            {:body {:name "test-repo"
                    :full_name "ursacorp/test-repo"
@@ -33,24 +33,21 @@
 
 (deftest we-cant-follow-a-repo-twice
   (let [request {:user {:id 2}
-                 :body {:id 42705074
-                        :full_name "ursacorp/test-repo"
-                        :name "test-repo"
-                        :owner {:id 7268171
-                                :login "ursacorp"
-                                :type "Organization"}
-                        :private false
-                        :fork false}}]
+                 :params {:id 42705074
+                          :full_name "ursacorp/test-repo"
+                          :name "test-repo"
+                          :owner {:id 7268171
+                                  :login "ursacorp"
+                                  :type "Organization"}
+                          :private false
+                          :fork false}}]
     (is (= (repo/create! request)
            {:body {:message "You are already following that repository"}
             :status 409}))))
 
 ; TODO below this
-(deftest following-creates-gh-user-when-it-needs-to
-  )
+(deftest following-creates-gh-user-when-it-needs-to)
 
-(deftest following-creates-gh-repo-when-it-needs-to
-  )
+(deftest following-creates-gh-repo-when-it-needs-to)
 
-(deftest we-can-unfollow-a-repo
-  )
+(deftest we-can-unfollow-a-repo)

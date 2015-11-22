@@ -14,7 +14,7 @@
     (dom/div
      {:class "statcard statcard-primary text-center p-a-md "
       :role "button"
-      :on-click #(nav/go-to-repo-dashboard! login name)}
+      :href (nav/repo-dashboard login name)}
      (dom/h3
       {:class "statcard-number"}
       name)

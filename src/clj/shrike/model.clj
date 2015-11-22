@@ -23,7 +23,7 @@
 (defentity build
   (table :shrike.build :build)
   (belongs-to github-repo {:fk :github_repo_id})
-  (belongs-to github-commit {:fk :github_commit_id}))
+  (belongs-to github-commit {:fk :github_head_commit_id}))
 
 (defentity user
   (table :shrike.user :user)
@@ -33,3 +33,7 @@
   (table :shrike.followed_repo)
   (belongs-to user)
   (belongs-to github-repo {:fk :github_repo_id}))
+
+(defentity plan
+  (table :shrike.plan :plan)
+  (belongs-to user {:fk :user_id}))

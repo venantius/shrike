@@ -1,7 +1,6 @@
 (ns titan.model
   (:require [clojure.tools.logging :as log]
-            [korma.core :as korma]
-            [schema.coerce :as coerce]))
+            [korma.core :as korma]))
 
 (defn- create!
   [entity]
@@ -35,36 +34,19 @@
   (fn [params]
     (korma/delete entity (korma/where params))))
 
-(defn convert-to-keyword
-  [k]
-  (if (= (type k) schema.core.OptionalKey)
-    (first (vals k))
-    k))
-
-(defn- schema-keys
-  "Grab the keys for this schema. Convert optional keys to ordinary keywords."
-  [schema]
-  (map convert-to-keyword (keys schema)))
-
-(defn coerce
-  [schema]
-  (fn [data]
-    (let [schema-keys (schema-keys schema)
-          data (select-keys data schema-keys)]
-      ((coerce/coercer
-        schema
-        coerce/string-coercion-matcher)
-       data))))
-
 (defn intern-fns
   [entity schema]
   (let [n (:name entity)]
-    (intern *ns* (symbol (str "create-" n "!")) (create! entity))
+    (intern *ns*
+            (with-meta
+              (symbol (str "create-" n "!"))
+              {:doc (format "Insert a new %s to the database." n)
+               :arglists '([params])})
+            (create! entity))
     (intern *ns* (symbol (str "fetch-" n)) (fetch entity))
     (intern *ns* (symbol (str "fetch-one-" n)) (fetch-one entity))
     (intern *ns* (symbol (str "update-" n "!")) (update! entity))
-    (intern *ns* (symbol (str "delete-" n "!")) (delete! entity))
-    (intern *ns* (symbol (str "map->" n)) (coerce schema))))
+    (intern *ns* (symbol (str "delete-" n "!")) (delete! entity))))
 
 (defmacro defmodel
   "Define basic database methods for the target entity. Also does
