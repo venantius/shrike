@@ -1,7 +1,9 @@
 (ns shrike.controller.webhooks.github
   "GitHub event webhook controller."
   (:require [clojure.tools.logging :as log]
+            [shrike.model.github.commit :as commit]
             [shrike.model.github.repo :as repo]
+            [shrike.model.build :as build]
             [shrike.service.aws.sqs :as queue]))
 
 (defn ping-event-handler
@@ -13,13 +15,13 @@
 
 (defn push-event-handler
   [{:keys [params] :as request}]
-  (let [{:keys [repository hook]} params
-        repo-id (:id repository)]
-    (log/info (keys params))
-    (log/warn (repo/fetch-one-github-repo {:id repo-id}))
+  (let [{:keys [head_commit repository]} params
+        head-commit (commit/create-or-fetch-from-push-event!
+                     repository head_commit)]
+    (build/create-from-push-hook params head-commit)
     {:status 200
      :headers {"Content-Type" "application/json"}
-     :body (dissoc request :body :server-exchange)}))
+     :body {:message "Webhook correctly parsed."}}))
 
 (defn listen
   "Master webhook listener. Routes requests based on the event type."

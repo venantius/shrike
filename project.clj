@@ -47,7 +47,7 @@
   :main shrike.core
   :aot [titan.commands.db.migrate]
   :source-paths ["src/clj", "src/cljs"]
-  :test-paths ["test/clj"]
+  :test-paths ["test/clj", "test/cljc"]
   :min-lein-version "2.5.0"
   ;; maybe this will clean up our uberjar paths?
   :clean-targets ^{:protect false} ["resources/public/js/shrike"

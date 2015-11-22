@@ -37,7 +37,12 @@
 (defn intern-fns
   [entity schema]
   (let [n (:name entity)]
-    (intern *ns* (symbol (str "create-" n "!")) (create! entity))
+    (intern *ns*
+            (with-meta
+              (symbol (str "create-" n "!"))
+              {:doc (format "Insert a new %s to the database." n)
+               :arglists '([params])})
+            (create! entity))
     (intern *ns* (symbol (str "fetch-" n)) (fetch entity))
     (intern *ns* (symbol (str "fetch-one-" n)) (fetch-one entity))
     (intern *ns* (symbol (str "update-" n "!")) (update! entity))
