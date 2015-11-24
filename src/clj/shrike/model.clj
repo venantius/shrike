@@ -3,6 +3,8 @@
   (:refer-clojure :exclude [update])
   (:require [korma.core :refer :all]))
 
+(declare followed-repo)
+
 (defentity github-oauth-state
   (table :github.oauth_state :github-oauth-state))
 
