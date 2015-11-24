@@ -6,6 +6,7 @@
             [schema.core :as s]
             [shrike.model :as db]
             [shrike.model.github.user :as gh-user]
+            [shrike.model.plan :as plan]
             [titan.model :refer [defmodel]]))
 
 (defmodel db/user
@@ -15,6 +16,12 @@
    (s/optional-key :github_commit_it) s/Int
    (s/optional-key :lines_of_code) s/Int
    (s/optional-key :definitions) s/Int})
+
+(defn create-user-with-default-plan!
+  [user]
+  (let [user (create-user! user)]
+    (plan/create-plan-with-sqs-queue! {:user_id (:id user)})
+    user))
 
 (defn create-or-update-from-access-token!
   "First, figure out which GitHub user this access token corresponds to. That
@@ -29,7 +36,7 @@
     (if-let [user (fetch-one-user {:github_user_id (:id gh-user)})]
       (update-user! (:id user)
                     {:github_access_token_id (:id at)})
-      (create-user!
+      (create-user-with-default-plan!
        {:github_user_id (:id gh-user)
         :github_access_token_id (:id at)
         :name (:login gh-user)}))))
