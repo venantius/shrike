@@ -12,7 +12,7 @@
 (defn start-server
   "Start the Titan server."
   []
-  (let [host (or (env/env :host) "localhost")
+  (let [host (or (env/env :host) "127.0.0.1")
         port (or (env/env :port) 5000)]
     (db/set-korma-db)
     (nrepl/start-server)

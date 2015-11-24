@@ -42,5 +42,5 @@
   [queue-name]
   (sqs/receive-message
    credentials
-   queue-name
+   :queue-url queue-name
    :wait-time-seconds 6))
