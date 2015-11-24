@@ -27,6 +27,7 @@
 
 (defentity user
   (table :shrike.user :user)
+  (has-many followed-repo)
   (belongs-to github-access-token {:fk :github_access_token_id}))
 
 (defentity followed-repo
