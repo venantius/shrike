@@ -114,8 +114,6 @@
              {:env {:environment "production"}}
 
              :uberjar {:hooks [leiningen.cljsbuild]
-                       :env {:production true
-                             :host "0.0.0.0"}
                        :omit-source true
                        :aot :all
                        :prep-tasks [["cljsbuild" "once"] "compile"]
