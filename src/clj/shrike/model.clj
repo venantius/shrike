@@ -4,6 +4,7 @@
   (:require [korma.core :refer :all]))
 
 (declare followed-repo)
+(declare plan)
 
 (defentity github-oauth-state
   (table :github.oauth_state :github-oauth-state))
@@ -29,6 +30,8 @@
 
 (defentity user
   (table :shrike.user :user)
+  (has-many followed-repo)
+  (has-one plan)
   (belongs-to github-access-token {:fk :github_access_token_id}))
 
 (defentity followed-repo

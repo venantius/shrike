@@ -23,6 +23,15 @@
     (plan/create-plan-with-sqs-queue! {:user_id (:id user)})
     user))
 
+(defn fetch-user-with-show
+  [user]
+  (first
+   (select db/user
+           (where user)
+           (limit 1)
+           (with db/plan
+                 (fields :queue_url :plan_type)))))
+
 (defn create-or-update-from-access-token!
   "First, figure out which GitHub user this access token corresponds to. That
   user may need to be created in our database, or they may already exist.
