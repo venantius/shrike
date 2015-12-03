@@ -11,7 +11,7 @@
                  [org.omcljs/om "0.9.0"]
                  [prismatic/om-tools "0.3.12"]
                  [secretary "1.2.3"]
-                 [venantius/accountant "0.1.5"]
+                 [venantius/accountant "0.1.6"]
 
                  ;; This section is for shrike
                  [amazonica "0.3.34"]

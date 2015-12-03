@@ -8,13 +8,15 @@
 
 (defmodel db/plan
   {(s/optional-key :id) s/Int
-   (s/optional-key :user_id) s/Int})
+   (s/optional-key :user_id) s/Int
+   :plan_type s/Str
+   :queue_url s/Str})
 
 (defn create-plan-with-sqs-queue!
   [plan]
-  (let [plan (create-plan! plan)]
-    (sqs/create-queue (format "plan-" (:id plan)))
-    (update-plan! (:id plan) plan)))
+  (let [plan (create-plan! plan)
+        queue (sqs/create-queue (format "plan-%s" (:id plan)))]
+    (update-plan! (:id plan) (assoc plan :queue_url (:queue-url queue)))))
 
 (defn fetch-best-plan
   [repo]
