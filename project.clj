@@ -14,31 +14,13 @@
                  [venantius/accountant "0.1.5"]
 
                  ;; This section is for shrike
-                 [amazonica "0.3.34"]
-                 [tentacles "0.3.0"]
+                 [amazonica "0.3.52"]
+                 [tentacles "0.5.1"
+                  :exclusions [cheshire]]
+                 [titan "0.1.0-SNAPSHOT"]
 
-                 ;; Everything below here is needed for Titan
-                 [cheshire "5.5.0"]
-                 [clj-time "0.11.0"]
-                 [compojure "1.4.0"]
-                 [environ "1.0.0"]
-                 [org.clojure/tools.logging "0.3.1"]
-                 [org.clojure/tools.nrepl "0.2.12"]
-                 [org.slf4j/slf4j-log4j12 "1.7.12"]
-                 [org.immutant/immutant "2.1.0"
-                  :exclusions [[ch.qos.logback/logback-classic]
-                               [ch.qos.logback/logback-core]]]
-                 [korma "0.4.2"]
-                 [ragtime "0.5.2"]
-                 [ring "1.4.0"]
-                 [ring/ring-defaults "0.1.5"]
-                 [ring/ring-json "0.4.0"]
-                 [prismatic/schema "1.0.1"]
 
-                 ;; Additional JDBC drivers may be required.
-                 [org.postgresql/postgresql "9.4-1202-jdbc4"]
-                 [mvxcvi/whidbey "1.1.1"]
-                 [com.taoensso/tower "2.0.2"]
+
                  ]
 
   :plugins [[lein-cljsbuild "1.1.0"]
