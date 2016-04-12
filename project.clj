@@ -61,7 +61,7 @@
               :dependencies [[bond "0.2.5"]]
 
               :plugins [[jonase/eastwood "0.1.4"]
-                        [lein-figwheel "0.4.1"]
+                        [lein-figwheel "0.5.0"]
                         ]
 
               :eastwood {:exclude-linters [:deprecations]}
