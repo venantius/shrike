@@ -17,7 +17,7 @@
                  [amazonica "0.3.52"]
                  [tentacles "0.5.1"
                   :exclusions [cheshire]]
-                 [titan "0.1.0-SNAPSHOT"]
+                 [venantius/titan "0.1.0-SNAPSHOT"]
 
 
 
