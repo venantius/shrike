@@ -5,13 +5,15 @@
             [schema.core :as s]
             [titan.model :refer [defmodel]]))
 
-(defmodel db/github-commit
+(def github-commit-schema
   {:id s/Int
    :repo_id s/Int
    :sha s/Str
    :message s/Str
    :author_name s/Str
    :author_login s/Str})
+
+(defmodel db/github-commit)
 
 (defn create-or-fetch-from-push-event!
   "If this commit already exists, return it. Otherwise, create a new commit object."

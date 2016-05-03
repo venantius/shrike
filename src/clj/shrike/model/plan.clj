@@ -6,11 +6,13 @@
             [shrike.service.aws.sqs :as sqs]
             [titan.model :refer [defmodel]]))
 
-(defmodel db/plan
+(def plan-schema
   {(s/optional-key :id) s/Int
    (s/optional-key :user_id) s/Int
    :plan_type s/Str
    :queue_url s/Str})
+
+(defmodel db/plan)
 
 (defn create-plan-with-sqs-queue!
   [plan]

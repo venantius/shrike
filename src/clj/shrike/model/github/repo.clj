@@ -6,12 +6,14 @@
             [shrike.service.github.repo :as repo]
             [titan.model :refer [defmodel]]))
 
-(defmodel db/github-repo
+(def github-repo-schema
   {(s/optional-key :id) s/Int
    (s/optional-key :owner_id) s/Int
    (s/optional-key :name) s/Str
    (s/optional-key :private) s/Bool
    (s/optional-key :fork) s/Bool})
+
+(defmodel db/github-repo)
 
 (defn fetch-one-with-owner
   [repo]

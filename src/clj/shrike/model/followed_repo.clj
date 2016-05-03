@@ -4,9 +4,11 @@
             [shrike.model :as db]
             [titan.model :refer [defmodel]]))
 
-(defmodel db/followed-repo
+(def followed-repo-schema
   {(s/optional-key :user_id) s/Int
    (s/optional-key :github_repo_id) s/Int})
+
+(defmodel db/followed-repo)
 
 (defn fetch-with-full-repo-info
   [fr]

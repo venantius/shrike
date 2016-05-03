@@ -6,6 +6,8 @@
             [titan.model :refer [defmodel]]
             [schema.core :as s]))
 
-(defmodel db/github-oauth-state
+(def github-oauth-state-schema
   {(s/optional-key :id) s/Int
    (s/optional-key :state) s/Str})
+
+(defmodel db/github-oauth-state)

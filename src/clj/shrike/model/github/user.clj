@@ -9,10 +9,12 @@
             [titan.model :refer [defmodel]]
             [schema.core :as s]))
 
-(defmodel db/github-user
+(def github-user-schema
   {(s/optional-key :id) s/Int
    (s/optional-key :login) s/Str
    (s/optional-key :type) s/Str})
+
+(defmodel db/github-user)
 
 (defn fetch-or-create-from-access-token!
   [{:keys [token] :as at}]

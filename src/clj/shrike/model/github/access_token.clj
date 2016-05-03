@@ -5,10 +5,12 @@
             [korma.core :refer :all]
             [schema.core :as s]))
 
-(defmodel db/github-access-token
+(def github-access-token-schema
   {(s/optional-key :id) s/Int
    (s/optional-key :token) s/Str
    (s/optional-key :scope) s/Str})
+
+(defmodel db/github-access-token)
 
 (defn create-or-update-github-access-token!
   "Like it says on the tin. This sort of function is a little sloppy but it's

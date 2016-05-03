@@ -9,13 +9,15 @@
             [shrike.model.plan :as plan]
             [titan.model :refer [defmodel]]))
 
-(defmodel db/user
+(def user-schema
   {(s/optional-key :id) s/Int
    (s/optional-key :repo_build_id) s/Int
    (s/optional-key :github_repo_id) s/Int
    (s/optional-key :github_commit_it) s/Int
    (s/optional-key :lines_of_code) s/Int
    (s/optional-key :definitions) s/Int})
+
+(defmodel db/user)
 
 (defn create-user-with-default-plan!
   [user]
