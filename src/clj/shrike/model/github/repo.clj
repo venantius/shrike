@@ -24,8 +24,7 @@
 
 (defn enqueue-webhook
   [repo]
-  (let [plan (plan/fetch-best-plan-for-repo repo)])
-  )
+  (let [plan (plan/fetch-best-plan-for-repo repo)]))
 
 ;; How to find a plan?
 ;; a repo is followed by at least one user who has a paid plan

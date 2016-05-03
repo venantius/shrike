@@ -4,4 +4,4 @@
 
 ;; TODO
 #_(deftest fetch-one-with-owner-works
-  (is (= 0 1)))
+    (is (= 0 1)))

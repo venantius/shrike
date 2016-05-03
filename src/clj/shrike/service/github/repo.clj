@@ -27,10 +27,10 @@
   "Register a new webhook."
   [{:keys [login name] :as repo} user]
   (repos/create-hook
-    login
-    name
-    "web"
-    {:url "http://shrike-env.elasticbeanstalk.com/debug"
-     :content_type :json
-     :secret "alfalfa"}
-    (auth-map user)))
+   login
+   name
+   "web"
+   {:url "http://shrike-env.elasticbeanstalk.com/debug"
+    :content_type :json
+    :secret "alfalfa"}
+   (auth-map user)))

@@ -5,7 +5,7 @@
 
 ;; TODO
 #_(deftest fetch-one-by-username-and-repo-works
-  (is (= 0 1)))
+    (is (= 0 1)))
 
 #_(deftest fetch-by-username-and-repo-works
-  (is (= 0 1)))
+    (is (= 0 1)))

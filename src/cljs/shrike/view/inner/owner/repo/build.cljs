@@ -78,10 +78,10 @@
          "Style")))
       (dom/hr
        {:class "m-t-0"})
-       (condp = view
-         "build-summary"  (om/build build-summary data)
-         "build-coverage" (om/build coverage/build-coverage data)
-         "build-style"    (om/build style/build-style data))))))
+      (condp = view
+        "build-summary"  (om/build build-summary data)
+        "build-coverage" (om/build coverage/build-coverage data)
+        "build-style"    (om/build style/build-style data))))))
 
 (defcomponent build
   [{:keys [repo] :as data} owner]
@@ -89,33 +89,33 @@
    [_]
    (dom/div
     {:class "container-fluid container-fluid-spacious"}
-     (dom/div
-       {:class "row"}
-       (dom/div
-         {:class "col-xs-6"}
-
     (dom/div
-     {:class "dashhead m-t-md"}
+     {:class "row"}
      (dom/div
-      {:class "dashhead-titles"}
-      (dom/h6
-       {:class "dashhead-subtitle"}
-       "Shrike")
-      (dom/h2
-       {:class "dashhead-title"}
-       (str (:owner repo) "/" (:name repo) " ")))))
+      {:class "col-xs-6"}
+
+      (dom/div
+       {:class "dashhead m-t-md"}
        (dom/div
-         {:class "col-xs-6"}
-         (dom/div
-           {:class "dashhead m-t-md"}
-           (dom/div
-             {:class "dashhead-titles m-t"
-              :style {:float "right"}}
-             (dom/h2
-               {:class "dashhead-title"
-                :style {:color "#1997c6"}}
-               "settings "
-               (dom/span
-                 {:class "icon icon-cog"
-                  :style {:font-size "22"}}))))))
+        {:class "dashhead-titles"}
+        (dom/h6
+         {:class "dashhead-subtitle"}
+         "Shrike")
+        (dom/h2
+         {:class "dashhead-title"}
+         (str (:owner repo) "/" (:name repo) " ")))))
+     (dom/div
+      {:class "col-xs-6"}
+      (dom/div
+       {:class "dashhead m-t-md"}
+       (dom/div
+        {:class "dashhead-titles m-t"
+         :style {:float "right"}}
+        (dom/h2
+         {:class "dashhead-title"
+          :style {:color "#1997c6"}}
+         "settings "
+         (dom/span
+          {:class "icon icon-cog"
+           :style {:font-size "22"}}))))))
     (om/build build-statcards data))))

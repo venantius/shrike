@@ -7,7 +7,7 @@
             [shrike.model :as db]
             [titan.model :refer [defmodel]]))
 
-(defmodel db/build
+(def build-schema
   {(s/optional-key :id) s/Int
    (s/optional-key :repo_build_id) s/Int
    (s/optional-key :github_repo_id) s/Int
@@ -18,6 +18,8 @@
    (s/optional-key :lines_of_code) s/Int
    (s/optional-key :definitions) s/Int
    (s/optional-key :coverage) s/Num})
+
+(defmodel db/build)
 
 (defn fetch-one-by-username-and-repo
   [user repo build_id]

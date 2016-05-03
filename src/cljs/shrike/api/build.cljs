@@ -22,8 +22,8 @@
 (defn get-build
   [username repo build-id]
   (when-not
-    (and
-      (= (get-in @app-state [:repo :current-build :build_id]) (int build-id))
-      (= (get-in @app-state [:repo :owner]) username)
-      (= (get-in @app-state [:repo :name]) repo))
+   (and
+    (= (get-in @app-state [:repo :current-build :build_id]) (int build-id))
+    (= (get-in @app-state [:repo :owner]) username)
+    (= (get-in @app-state [:repo :name]) repo))
     (force-get-build username repo build-id)))

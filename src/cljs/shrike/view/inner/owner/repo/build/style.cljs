@@ -6,5 +6,5 @@
 (defcomponent build-style
   [data owner]
   (render
-    [_]
-    (dom/h4 "This is the style page. You probably got here by mistake.")))
+   [_]
+   (dom/h4 "This is the style page. You probably got here by mistake.")))

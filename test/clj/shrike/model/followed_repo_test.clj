@@ -5,4 +5,4 @@
 
 ;; TODO
 #_(deftest fetch-with-full-repo-info-works
-  (is (= 0 1)))
+    (is (= 0 1)))
