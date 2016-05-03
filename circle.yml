@@ -1,4 +1,6 @@
 machine:
+  java:
+    version: openjdk8
   environment:
     DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
   services:
