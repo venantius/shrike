@@ -1,7 +1,7 @@
 (ns shrike.model.user-test
   (:require [clojure.test :refer :all]
             [shrike.model.user :as user]
-            [titan.test.fixtures :refer [with-db-fixtures]]))
+            [titan.test.fixtures :refer [use-db-fixtures]]))
 
 ;; TODO
 #_(deftest create-or-update-from-access-token!-works

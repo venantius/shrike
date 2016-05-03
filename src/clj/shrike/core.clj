@@ -60,4 +60,4 @@
 
 (defn -main
   []
-  (server/start-server))
+  (server/start-server!))

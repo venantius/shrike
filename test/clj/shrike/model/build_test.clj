@@ -1,7 +1,7 @@
 (ns shrike.model.build-test
   (:require [clojure.test :refer :all]
             [shrike.model.build :as build]
-            [titan.test.fixtures :refer [with-db-fixtures]]))
+            [titan.test.fixtures :refer [use-db-fixtures]]))
 
 ;; TODO
 #_(deftest fetch-one-by-username-and-repo-works

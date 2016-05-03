@@ -2,9 +2,9 @@
   (:require [clojure.test :refer :all]
             [shrike.controller.user.repo.build :as build]
             [titan.http.response :as response]
-            [titan.test.fixtures :refer [with-db-fixtures]]))
+            [titan.test.fixtures :refer [use-db-fixtures]]))
 
-(with-db-fixtures)
+(use-db-fixtures)
 
 #_(deftest get-works
   (let [request {:params {:username "ursacorp"

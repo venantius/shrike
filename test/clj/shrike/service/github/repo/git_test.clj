@@ -2,9 +2,9 @@
   (:require [clojure.test :refer :all]
             [shrike.model.user :as user]
             [shrike.service.github.repo.git :as git]
-            [titan.test.fixtures :refer [with-db-fixtures]]))
+            [titan.test.fixtures :refer [use-db-fixtures]]))
 
-(with-db-fixtures)
+(use-db-fixtures)
 
 (deftest we-can-get-a-commit
   (let [user (user/fetch-one-user-with-access-token {:github_user_id 14307759})]

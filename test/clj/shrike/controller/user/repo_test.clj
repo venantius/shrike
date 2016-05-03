@@ -1,9 +1,9 @@
 (ns shrike.controller.user.repo-test
   (:require [clojure.test :refer :all]
             [shrike.controller.user.repo :as repo]
-            [titan.test.fixtures :refer [with-db-fixtures]]))
+            [titan.test.fixtures :refer [use-db-fixtures]]))
 
-(with-db-fixtures)
+(use-db-fixtures)
 
 (deftest we-can-fetch-the-users-repos
   (let [request {:user {:id 2}}]

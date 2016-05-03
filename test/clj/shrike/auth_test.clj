@@ -1,9 +1,9 @@
 (ns shrike.auth-test
   (:require [clojure.test :refer :all]
             [shrike.auth :as auth]
-            [titan.test.fixtures :refer [with-db-fixtures]]))
+            [titan.test.fixtures :refer [use-db-fixtures]]))
 
-(with-db-fixtures)
+(use-db-fixtures)
 
 (deftest authn-fn-works
   (let [req {:session {:id 1}}]
